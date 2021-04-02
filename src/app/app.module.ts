@@ -15,8 +15,9 @@ import { HomeAdminComponent } from './admin/home-admin/home-admin.component';
 import { LoginAdminComponent } from './auth/login-admin/login-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 @NgModule({
+  
   declarations: [
     AppComponent,
     FooterComponent,
@@ -29,6 +30,7 @@ import { HttpClientModule } from '@angular/common/http';
     LoginAdminComponent
   ],
   imports: [
+    NgMultiSelectDropDownModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
