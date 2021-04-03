@@ -10,7 +10,7 @@ export class AdminService {
 
   constructor(private http: HttpClient) { }
 
-  path = "http://localhost:3000";
+  path = "http://localhost:3000/api";
   /**
    * Option http
    */
@@ -41,11 +41,7 @@ export class AdminService {
    */
   LoginAdmin(data) {
     const options = this.createRequestOptions();
-    const data2={
-      "email":"hatem@hatem.com",
-      "password":"123456789"
-      }
-    return this.http.post(this.path+"/api/auth/admin", JSON.stringify(data), { headers: options }).
+    return this.http.post(this.path+"/auth/admin", JSON.stringify(data), { headers: options }).
       pipe(retry(2),
         catchError(this.traitementErreur))
   }

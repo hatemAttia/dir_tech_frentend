@@ -1,0 +1,60 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="bower_components/angular-bootstrap-multiselect/dist/angular-bootstrap-multiselect.min.js"></script>
+
+<!------ Include the above in your HEAD tag ---------->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
+
+<div style="padding: 100px 0px;width: 100%; background:url(assets/img/bg-epi.png); height: 110%; background-attachment: fixed;">
+
+
+
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <header class="card-header ">
+                    <a class="float-right btn btn-outline-danger mt-1" (click)="navigateTo('signup')">Log in</a>
+                    <h4 class="card-title mt-2 text-danger">Log in</h4>
+                </header>
+                <article class="card-body">
+                    <form [formGroup]="loginForm">
+
+                        <div class="form-group">
+                            <label>Email address</label>
+                            <input type="email" class="form-control" formControlName="email">
+                        </div>
+
+                        <div class="form-group">
+                            <label>Create password</label>
+                            <input class="form-control" formControlName="password" type="password">
+                        </div>
+                        <label class="container" (change)="onItemChange($event.target.value)" checked="checked">Teacher
+                            <input type="radio" name="radio" value="Teacher">
+                            <span class="checkmark"></span>
+                        </label>
+                        <label class="container" (change)="onItemChange($event.target.value)">Stuff
+                            <input type="radio" name="radio"  value="Stuff">
+                            <span class="checkmark"></span>
+                        </label>
+                        <div *ngIf=valid>
+                            <label style="color:red;">tous les champs obligatoire</label>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-danger btn-block" (click)="signup()"> Register  </button>
+                        </div>
+                    </form>
+                </article>
+                <!-- card-body end .// -->
+
+            </div>
+            <!-- card.// -->
+        </div>
+        <!-- col.//-->
+
+    </div>
+    <!-- row.//-->
+</div>
+<!--container end.//-->

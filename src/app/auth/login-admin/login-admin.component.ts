@@ -13,7 +13,7 @@ export class LoginAdminComponent implements OnInit {
   loginForm: FormGroup;
   constructor(private router: Router,
     public adminServ: AdminService,
-    private formBuilder: FormBuilder,) { 
+    private formBuilder: FormBuilder) { 
       this.loginForm = this.formBuilder.group({
         email: ['', Validators.compose([
           Validators.pattern('^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]{0,10})*@[A-Za-z0-9]+(\\.[A-Za-z0-9]{0,10})*(\\.[A-Za-z]{0,5})$'),
@@ -34,6 +34,9 @@ export class LoginAdminComponent implements OnInit {
     this.router.navigate([path]);
   }
 
+  /**
+   * Login function
+   */
   login() {
     this.adminServ.LoginAdmin(this.loginForm.value).subscribe(res=>{      
         this.valid=true;

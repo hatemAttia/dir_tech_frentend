@@ -16,6 +16,7 @@ import { LoginAdminComponent } from './auth/login-admin/login-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
+import { LoginUserComponent } from './auth/login-user/login-user.component';
 @NgModule({
   
   declarations: [
@@ -27,16 +28,16 @@ import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
     HomeComponent,
     SignupComponent,
     HomeAdminComponent,
-    LoginAdminComponent
+    LoginAdminComponent,
+    LoginUserComponent
   ],
   imports: [
-    NgMultiSelectDropDownModule,
+    NgMultiSelectDropDownModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
-    RouterModule.forRoot(routes ) ],
+    RouterModule.forRoot(routes) ],
   providers: [],
   bootstrap: [AppComponent]
 })

@@ -8,84 +8,107 @@
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
 
-<div class="container">
+<div style="padding: 100px 0px;width: 100%; background:url(assets/img/bg-epi.png); height: 175%; background-attachment: fixed;">
 
 
 
     <div class="row justify-content-center">
         <div class="col-md-6">
             <div class="card">
-                <header class="card-header">
-                    <a href="" class="float-right btn btn-outline-primary mt-1">Log in</a>
-                    <h4 class="card-title mt-2">Sign up</h4>
+                <header class="card-header ">
+                    <a class="float-right btn btn-outline-danger mt-1" (click)="navigateTo('login')">Log in</a>
+                    <h4 class="card-title mt-2 text-danger">Sign up</h4>
                 </header>
                 <article class="card-body">
-                    <form>
+                    <form [formGroup]="signupForm">
                         <div class="form-row">
                             <div class="col form-group">
                                 <label>First name </label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="text" class="form-control" formControlName="firstname">
                             </div>
                             <!-- form-group end.// -->
                             <div class="col form-group">
                                 <label>Last name</label>
-                                <input type="text" class="form-control" placeholder=" ">
+                                <input type="text" class="form-control" formControlName="lastname">
                             </div>
                             <!-- form-group end.// -->
                         </div>
                         <!-- form-row end.// -->
                         <div class="form-group">
                             <label>Email address</label>
-                            <input type="email" class="form-control" placeholder="">
+                            <input type="email" class="form-control" formControlName="email">
                             <small class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label>phone Number </label>
+                            <input type="number" class="form-control" formControlName="phonenumber">
                         </div>
                         <div class="form-row">
                             <div class="col form-group">
                                 <label>CIN </label>
-                                <input type="text" class="form-control" placeholder="">
+                                <input type="number" class="form-control" formControlName="cin">
                             </div>
-                            <!-- form-group end.// -->
                             <div class="col form-group">
                                 <label>Matricule</label>
-                                <input type="text" class="form-control" placeholder=" ">
+                                <input type="text" class="form-control" formControlName="matricule">
                             </div>
-                            <!-- form-group end.// -->
                         </div>
-                        <!-- form-group end.// -->
-
-                        <!-- form-group end.// -->
+                        <!-- change User Type -->
                         <div class="form-row">
                             <div class="form-group col-md-6">
-                                <label>Niveau</label>
-                                <input type="text" class="form-control">
+                                <label>Type</label>
+                                <select id="inputState" class="form-control" (change)="onItemSelectType($event.target.value)" formControlName="level">
+                                    <option *ngFor="let type of types" > {{type}}</option>
+                                </select>
                             </div>
-                            <!-- form-group end.// -->
+                        </div>
+                        <!-- Form stuff -->
+                        <div class="form-row">
+                            <div class="form-group col" *ngIf="userType=='Stuff'">
+                                <label>Poste</label>
+                                <select id="inputState" class="form-control" formControlName="poste">
+                              <option *ngFor="let option of options" > {{option}}</option>
+
+                            </select>
+                            </div>
+                        </div>
+                        <!-- end Form stuff -->
+                        <!-- Form teacher -->
+                        <div class="form-row" *ngIf="userType=='Teacher'">
                             <div class="form-group col-md-6">
-                                <label>Competance</label>
-                                <ng-multiselect-dropdown [placeholder]="'Competance'" [settings]="dropdownSettings" [data]="dropdownList" [(ngModel)]="selectedItems" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                <label>Level</label>
+                                <select id="inputState" class="form-control" formControlName="level">
+                                  <option *ngFor="let option of options" > {{option}}</option>
+                                   
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <label>Competence</label>
+                                <ng-multiselect-dropdown formControlName="skill" [placeholder]="'Competence'" [settings]="dropdownSettings" [data]="dropdownList" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                 </ng-multiselect-dropdown>
                             </div>
-                            <!-- form-group end.// -->
                         </div>
-                        <!-- form-row.// -->
-                        <div class="form-group">
+                        <div class="form-group" *ngIf="userType=='Teacher'">
                             <label>Discription</label>
-                            <input class="form-control" type="password">
+                            <textarea class="form-control" formControlName="description" type="text"></textarea>
                         </div>
+                        <!-- end form teacher -->
                         <div class="form-group">
                             <label>Create password</label>
-                            <input class="form-control" type="password">
+                            <input class="form-control" formControlName="password" type="password">
                         </div>
-                        <!-- form-group end.// -->
+                        <div *ngIf=valid>
+                            <label style="color:red;">tous les champs obligatoire</label>
+                        </div>
                         <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-block"> Register  </button>
+                            <button type="submit" class="btn btn-danger btn-block" (click)="signup()"> Register  </button>
                         </div>
                         <!-- form-group// -->
                         <small class="text-muted">By clicking the 'Sign Up' button, you confirm that you accept our <br> Terms of use and Privacy Policy.</small>
                     </form>
                 </article>
                 <!-- card-body end .// -->
-                <div class="border-top card-body text-center">Have an account? <a href="">Log In</a></div>
+
             </div>
             <!-- card.// -->
         </div>
@@ -93,7 +116,5 @@
 
     </div>
     <!-- row.//-->
-
-
 </div>
 <!--container end.//-->
