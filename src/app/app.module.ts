@@ -17,6 +17,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { NgMultiSelectDropDownModule } from 'ng-multiselect-dropdown';
 import { LoginUserComponent } from './auth/login-user/login-user.component';
+import { TeaherListComponent } from './admin/teaher-list/teaher-list.component';
+import { SerchTeacherPipe } from './shared/pipes/serch-teacher.pipe';
+import { ProfilAdminComponent } from './admin/profil-admin/profil-admin.component';
 @NgModule({
   
   declarations: [
@@ -29,7 +32,10 @@ import { LoginUserComponent } from './auth/login-user/login-user.component';
     SignupComponent,
     HomeAdminComponent,
     LoginAdminComponent,
-    LoginUserComponent
+    LoginUserComponent,
+    TeaherListComponent,
+    SerchTeacherPipe,
+    ProfilAdminComponent
   ],
   imports: [
     NgMultiSelectDropDownModule.forRoot(),

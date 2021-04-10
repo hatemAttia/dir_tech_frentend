@@ -25,10 +25,10 @@
                         ],
                         "styles": [
                             "src/assets/css/bootstrap.min.css",
-                            "src/assets/css/light-bootstrap-dashboard.css",
-                            "src/assets/css/demo.css",
                             "src/assets/css/util.css",
                             "src/assets/css/main.css",
+                            "src/assets/css/light-bootstrap-dashboard.css",
+                            "src/assets/css/demo.css",
                             "src/styles.css"
                         ],
                         "scripts": [

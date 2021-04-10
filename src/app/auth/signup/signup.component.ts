@@ -32,8 +32,8 @@ export class SignupComponent implements OnInit {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       matricule: ['', Validators.required],
-      phonenumber: ['', Validators.required],
-      cin: ['', Validators.required],
+      phonenumber: ['', [Validators.required,Validators.min(10000000),Validators.maxLength(99999999)]],
+      cin: ['',[Validators.required,Validators.min(10000000),Validators.maxLength(99999999)]],
       level: [''],
       description: [''],
       skill: [''],
@@ -100,10 +100,8 @@ export class SignupComponent implements OnInit {
    * 
    */
   signup() {
-    console.log(this.signupForm.get('level').value);
-    console.log(this.signupForm.get('skill').value);
-    console.log(this.signupForm.get('description').value);
-    console.log(this.signupForm.valid);
+    console.log(this.signupForm.get('phonenumber').valid);
+      
 
 
     if (this.userType == "Teacher") {

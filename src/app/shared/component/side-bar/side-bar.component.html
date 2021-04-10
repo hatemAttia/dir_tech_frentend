@@ -1,4 +1,3 @@
-
 <div class="sidebar-wrapper">
     <div class="logo">
         <a href="http://www.creative-tim.com" class="simple-text">
@@ -12,16 +11,16 @@
                 <p>Dashboard</p>
             </a>
         </li>
-        <li>
-            <a class="nav-link" href="./user.html">
+        <li (click)="navigateTo('admin/profil')">
+            <a class="nav-link">
                 <i class="nc-icon nc-circle-09"></i>
                 <p>User Profile</p>
             </a>
         </li>
-        <li>
-            <a class="nav-link" href="./table.html">
+        <li (click)="navigateTo('admin/teacher')">
+            <a class="nav-link">
                 <i class="nc-icon nc-notes"></i>
-                <p>Table List</p>
+                <p>Teacher</p>
             </a>
         </li>
         <li>

@@ -10,7 +10,8 @@ import { UserService } from 'src/app/shared/services/user.service';
 })
 export class LoginUserComponent implements OnInit {
   userType;
-  loginForm:FormGroup;
+  valid;
+  loginForm: FormGroup;
   constructor(
     public userServ: UserService,
     private router: Router,
@@ -19,23 +20,52 @@ export class LoginUserComponent implements OnInit {
       email: ['', Validators.compose([
         Validators.pattern('^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]{0,10})*@[A-Za-z0-9]+(\\.[A-Za-z0-9]{0,10})*(\\.[A-Za-z]{0,5})$'),
         Validators.required])],
-      password: ['', Validators.required]});
+      password: ['', Validators.required]
+    });
   }
 
 
   ngOnInit() { }
 
-    /**
-   * Navigation
-   * @param path: string; ;
-   */
-     navigateTo(path: string) {
-      this.router.navigate([path]);
+  /**
+ * Navigation
+ * @param path: string; ;
+ */
+  navigateTo(path: string) {
+    this.router.navigate([path]);
+  }
+
+  onItemChange(value) {
+    this.userType = value;
+    console.log(" Value is : ", value);
+  }
+
+  /**
+  * Login function
+  */
+  loginUser() {
+    if (this.loginForm.valid) {
+      if (this.userType == "Stuff") {
+        this.userServ.stuffLogin(this.loginForm.value).subscribe(res => {
+          this.valid = false;
+          console.log(res)
+     //     this.navigateTo("admin/home");
+        },
+          error => {
+            console.log(error);
+            this.valid = true;
+          });
+      } else {
+        this.userServ.teacherLogin(this.loginForm.value).subscribe(res => {
+          console.log(res)
+          this.valid = false;
+  //        this.navigateTo("admin/home");
+        },
+          error => {
+            console.log(error);
+            this.valid = true;
+          });
+      }
     }
-  
-    onItemChange(value){
-      this.userType=value;
-      console.log(" Value is : ", value );
-   }
-   
+  }
 }

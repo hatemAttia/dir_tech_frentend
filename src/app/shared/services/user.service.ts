@@ -39,23 +39,23 @@ export class UserService {
   * @param element 
   */
   getAllSkills() {
-    return this.http.get("http://localhost:3000/api/skill/all").pipe(retry(2),
+    return this.http.get(this.path+"/skill/all").pipe(retry(2),
       catchError(this.traitementErreur));
   }
 
   /**
-  * Login admin
+  * Add Teacher
   * @param element 
   */
   addEnseignant(data) {
     const options = this.createRequestOptions();
-    return this.http.post(this.path + "/enseignant/new", JSON.stringify(data), { headers: options }).
+    return this.http.post(this.path + "/teacher/new", JSON.stringify(data), { headers: options }).
       pipe(retry(2),
         catchError(this.traitementErreur))
   }
 
   /**
-  * Login admin
+  * Add Stuff
   * @param element 
   */
    addPersonel(data) {
@@ -66,12 +66,23 @@ export class UserService {
   }
 
   /**
-   * Login admin
+   * Login stuff
    * @param element 
    */
    stuffLogin(data) {
     const options = this.createRequestOptions();
     return this.http.post(this.path+"/auth/stuff", JSON.stringify(data), { headers: options }).
+      pipe(retry(2),
+        catchError(this.traitementErreur))
+  }
+
+  /**
+   * Login teacher
+   * @param element 
+   */
+   teacherLogin(data) {
+    const options = this.createRequestOptions();
+    return this.http.post(this.path+"/auth/teacher", JSON.stringify(data), { headers: options }).
       pipe(retry(2),
         catchError(this.traitementErreur))
   }
