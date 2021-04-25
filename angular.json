@@ -29,7 +29,9 @@
                             "src/assets/css/main.css",
                             "src/assets/css/light-bootstrap-dashboard.css",
                             "src/assets/css/demo.css",
-                            "src/styles.css"
+                            "src/styles.css",
+                            "src/assets/css/stylehome.css"
+
                         ],
                         "scripts": [
                             "src/assets/js/core/jquery.3.2.1.min.js",
@@ -39,7 +41,9 @@
                             "src/assets/js/plugins/chartist.min.js",
                             "src/assets/js/plugins/bootstrap-notify.js",
                             "src/assets/js/light-bootstrap-dashboard.js",
-                            "src/assets/js/demo.js"
+                            "src/assets/js/demo.js",
+                            "src/assets/js/mainhome.js"
+
                         ]
                     },
                     "configurations": {

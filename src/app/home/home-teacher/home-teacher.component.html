@@ -1,0 +1,68 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<!-- Team -->
+<section id="team" class="pb-5">
+    <div class="container">
+        <h5 class="section-title h1">OUR TEAChER</h5>
+        <div class="row col-md ">
+            <div class="col-md-4 d-flex justify-content-center container-search">
+                <div class="input-group">
+                </div>
+            </div>
+            <div class="col-md-7 d-flex justify-content-center container-search">
+                <div class="input-group">
+                    <select id="inputState" style="margin-right: 20px;" class="form-control" [(ngModel)]="skill">
+                        <option *ngFor="let option of options" > {{option.name}}</option>
+                      </select>
+                    <input type="search" class="form-control rounded" placeholder="name" [(ngModel)]="searchName" aria-label="Search" aria-describedby="search-addon" />
+                    <button type="button" (click)="searchTeacher()" class="btn btn-outline-danger">search</button>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <!-- Team member -->
+            <div class="col-xs-12 col-sm-6 col-md-4" *ngFor="let teacher of listTeachers | serchTeacher: searchName | paginate: { itemsPerPage: 6, currentPage: p }">
+                <div class="image-flip">
+                    <div class="mainflip flip-0">
+                        <div class="frontside">
+                            <div class="card">
+                                <div class="card-body text-center">
+                                    <p><img class=" img-fluid" src="http://localhost:3000/{{teacher.avatar}}" alt="card image"></p>
+                                    <h4 class="card-title">{{teacher.lastname}} {{teacher.firstname}}</h4>
+                                    <p class="card-text"> {{teacher.email}}</p>
+                                    <p class="card-text">{{teacher.level}}</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="backside">
+                            <div class="card">
+                                <div class="card-body text-center mt-4" style="width: 350px;">
+                                    <h4 class="card-title">{{teacher.lastname}} {{teacher.firstname}}</h4>
+                                    <p class="card-text">{{teacher.description}}</p>
+                                    <ul class="list-inline">
+                                        <li class="list-inline-item" *ngFor="let skill of teacher.skills">
+                                            <p style="color: seagreen;">{{skill.name}}</p>
+                                        </li>
+                                    </ul>
+                                    <a href="https://www.fiverr.com/share/qb8D02" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- ./Team member -->
+
+        </div>
+        <div class="d-flex justify-content-center">
+            <pagination-controls class="my-pagination" (pageChange)="p = $event"></pagination-controls>
+        </div>
+    </div>
+</section>
+<!-- Team -->

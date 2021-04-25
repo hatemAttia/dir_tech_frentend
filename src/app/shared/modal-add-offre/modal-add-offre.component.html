@@ -1,0 +1,61 @@
+<p>modal-add-offre works!</p>
+<div class="jw-modal">
+    <div class="jw-modal-body">
+        <ng-content></ng-content>
+        <div class="content" style="padding-top: 50px;">
+            <div class="container-fluid">
+                <div class="section-title">
+                    <h3>Offer </h3>
+                </div>
+                <div class="row col-md ">
+                    <div class="col-md-12 d-flex justify-content-center">
+                        <div class="card">
+                            <div class="card-header">
+                                <h4 class="card-title">Add Offer</h4>
+                            </div>
+                            <div class="card-body">
+                                <form [formGroup]="offerForm">
+                                    <div class="row">
+                                        <div class="col-md-5 pr-1">
+                                            <div class="form-group">
+                                                <label>Title</label>
+                                                <input type="text" class="form-control" placeholder="Ttle" b formControlName="title">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3 px-1">
+                                            <div class="form-group">
+                                                <label>Poste</label>
+                                                <input type="text" formControlName="poste" class="form-control" placeholder="teacher...">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4 pl-1">
+                                            <div class="form-group">
+                                                <label for="exampleInputEmail1">Dead Line</label>
+                                                <input type="date" class="form-control" formControlName="deadline">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12 pr-1">
+                                            <div class="form-group">
+                                                <label>Description</label>
+                                                <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ========= end  stuff form ========== -->
+                                    <div class="text-center alert alert-success opacity" role="alert" *ngIf="userUploaded">
+                                        Add Offer
+                                    </div>
+                                    <button type="submit " class="btn btn-info btn-danger pull-right" (click)="addOffer() ">Registrer</button>
+                                    <div class="clearfix "></div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="jw-modal-background"></div>

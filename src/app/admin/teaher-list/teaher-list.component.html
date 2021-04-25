@@ -6,7 +6,7 @@
                     <div class="card-header ">
                         <h4 class="card-title">Teacher List</h4>
                         <div style="float: right; display: flex;">
-                            <input type="search" [(ngModel)]="serchName" style=" margin-top: 5px;" *ngIf="tSearch" class="form-control" placeholder="First name" value=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <input type="search" [(ngModel)]="searchName" style=" margin-top: 5px;" *ngIf="tSearch" class="form-control" placeholder="First name" value=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <a _ngcontent-htr-c55=" " class="btn btn-outline mt-1 " (click)="toggleSearch()">
                                 <i class="nc-icon nc-zoom-split "></i>&nbsp;&nbsp;Search</a>
                         </div>
@@ -21,7 +21,7 @@
                                 <th>Matricule</th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let teacher of listTeacher | serchTeacher: serchName">
+                                <tr *ngFor="let teacher of listTeacher | serchTeacher: searchName">
                                     <td>{{teacher.id}}</td>
                                     <td>{{teacher.lastname}} {{teacher.firstname}}</td>
                                     <td>{{teacher.email}}</td>

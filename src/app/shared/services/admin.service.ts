@@ -66,6 +66,7 @@ export class AdminService {
       pipe(retry(2),
         catchError(this.traitementErreur))
   }
+  
   /**
    * Update Image
    * @param element 

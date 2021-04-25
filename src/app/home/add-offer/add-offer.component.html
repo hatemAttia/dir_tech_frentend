@@ -1,0 +1,73 @@
+<app-modal-add-offre id="custom-modal-2">
+    <div style="padding-top: 10px;">
+        <button class="float-right btn btn-outline-danger exit-button mt-1" (click)="closeModal('custom-modal-2');">
+        <i class="nc-icon nc-simple-remove"></i>
+    </button>
+    </div>
+</app-modal-add-offre>
+
+<div style="padding-top: 200px;">
+    <div class="section-title">
+        <h2>Offer</h2>
+        <button (click)="openModal('custom-modal-2');" type="button" class="btn btn-danger">add Offre</button>
+    </div>
+    <!-- ============================================================== -->
+    <section id="blog" class="blog">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 entries">
+                    <div class="row">
+                        <div class="col-md-4 d-flex align-items-stretch" *ngFor="let offre of listOffres">
+                            <article class="entry">
+
+                                <div class="entry-img">
+                                    <img src="assets/img/blog-1.jpg" alt="" class="img-fluid">
+                                </div>
+
+                                <h2 class="entry-title">
+                                    {{offre.title}}</h2>
+
+                                <div class="entry-meta">
+                                    <ul>
+                                        <li class="d-flex align-items-center"><i class="nc-icon nc-time-alarm"></i> <time datetime="2020-01-01"> {{offre.deadline}}</time></li>
+                                    </ul>
+                                </div>
+                                <div class="entry-meta">
+                                    <ul>
+                                        <li class="d-flex align-items-center"> <i class="nc-icon nc-bag "></i> {{offre.poste}}</li>
+                                    </ul>
+                                </div>
+                                <div class="entry-content">
+                                    <p>
+                                        {{offre.description}}
+                                    </p>
+                                    <div class="read-more">
+                                        <a href="blog-single.html">Update Offre</a>
+                                    </div>
+                                </div>
+
+                            </article>
+                            <!-- End blog entry -->
+                        </div>
+
+
+
+                    </div>
+
+                    <div class="blog-pagination">
+                        <ul class="justify-content-center">
+                            <li class="disabled"><i class="icofont-rounded-left"></i></li>
+                            <li><a href="#">1</a></li>
+                            <li class="active"><a href="#">2</a></li>
+                            <li><a href="#">3</a></li>
+                            <li><a href="#"><i class="icofont-rounded-right"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- End blog entries list -->
+            </div>
+        </div>
+    </section>
+    <!-- ============================================================== -->
+
+</div>

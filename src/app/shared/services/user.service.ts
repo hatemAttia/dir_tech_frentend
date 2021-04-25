@@ -9,7 +9,110 @@ import { Observable, throwError } from 'rxjs';
 export class UserService {
 
   constructor(private http: HttpClient) { }
-
+  userData = {
+    "id": 1,
+    "firstname": "bassma",
+    "lastname": "cc",
+    "email": "basma@gmail.com",
+    "cin": 4552266,
+    "password": "XBCyiTFezXo+pwTsZ58hO8dUDKrSxlz9m7dLnuyNaFZEVVtDVn4oe3QEAjiGOaD4",
+    "phonenumber": 12111112,
+    "matricule": "sdq222",
+    "avatar": "uploads/user.png",
+    "poste": "Teacher",
+    "createdAt": "2021-04-11T10:38:30.000Z",
+    "updatedAt": "2021-04-11T21:03:16.000Z",
+    "offres": [
+      {
+        "id": 9,
+        "title": "sssssss",
+        "description": "ssssssssssssssssssss",
+        "deadline": "2021-04-14T00:00:00.000Z",
+        "avatar": "uploads/user.png",
+        "poste": "ssssss",
+        "createdAt": "2021-04-22T20:59:44.000Z",
+        "updatedAt": "2021-04-22T20:59:44.000Z",
+        "PersonelId": 1
+      },
+      {
+        "id": 8,
+        "title": "offre d'emploi",
+        "description": "Ad impedit qui officiis est in non aliquid veniam laborum. Id ipsum qui aut. Sit aliquam et quia molestias laboriosam. Tempora nam odit omnis eum corrupti qui aliquid excepturi molesti",
+        "deadline": "2012-04-23T18:25:43.000Z",
+        "avatar": "uploads/user.png",
+        "poste": "teacher",
+        "createdAt": "2021-04-22T20:51:38.000Z",
+        "updatedAt": "2021-04-22T20:51:38.000Z",
+        "PersonelId": 1
+      },
+      {
+        "id": 7,
+        "title": "offre d'emploi",
+        "description": "Ad impedit qui officiis est in non aliquid veniam laborum. Id ipsum qui aut. Sit aliquam et quia molestias laboriosam. Tempora nam odit omnis eum corrupti qui aliquid excepturi molesti",
+        "deadline": "2012-04-23T18:25:43.000Z",
+        "avatar": "uploads/user.png",
+        "poste": "teacher",
+        "createdAt": "2021-04-11T10:40:13.000Z",
+        "updatedAt": "2021-04-11T10:40:13.000Z",
+        "PersonelId": 1
+      },
+      {
+        "id": 6,
+        "title": "offre d'emploi",
+        "description": "Ad impedit qui officiis est in non aliquid veniam laborum. Id ipsum qui aut. Sit aliquam et quia molestias laboriosam. Tempora nam odit omnis eum corrupti qui aliquid excepturi molesti",
+        "deadline": "2012-04-23T18:25:43.000Z",
+        "avatar": "uploads/user.png",
+        "poste": "teacher",
+        "createdAt": "2021-04-11T10:40:12.000Z",
+        "updatedAt": "2021-04-11T10:40:12.000Z",
+        "PersonelId": 1
+      },
+      {
+        "id": 5,
+        "title": "offre d'emploi",
+        "description": "Ad impedit qui officiis est in non aliquid veniam laborum. Id ipsum qui aut. Sit aliquam et quia molestias laboriosam. Tempora nam odit omnis eum corrupti qui aliquid excepturi molesti",
+        "deadline": "2012-04-23T18:25:43.000Z",
+        "avatar": "uploads/user.png",
+        "poste": "teacher",
+        "createdAt": "2021-04-11T10:40:12.000Z",
+        "updatedAt": "2021-04-11T10:40:12.000Z",
+        "PersonelId": 1
+      },
+      {
+        "id": 4,
+        "title": "offre d'emploi",
+        "description": "Ad impedit qui officiis est in non aliquid veniam laborum. Id ipsum qui aut. Sit aliquam et quia molestias laboriosam. Tempora nam odit omnis eum corrupti qui aliquid excepturi molesti",
+        "deadline": "2012-04-23T18:25:43.000Z",
+        "avatar": "uploads/user.png",
+        "poste": "teacher",
+        "createdAt": "2021-04-11T10:40:12.000Z",
+        "updatedAt": "2021-04-11T10:40:12.000Z",
+        "PersonelId": 1
+      },
+      {
+        "id": 3,
+        "title": "offre d'emploi",
+        "description": "Ad impedit qui officiis est in non aliquid veniam laborum. Id ipsum qui aut. Sit aliquam et quia molestias laboriosam. Tempora nam odit omnis eum corrupti qui aliquid excepturi molesti",
+        "deadline": "2012-04-23T18:25:43.000Z",
+        "avatar": "uploads/user.png",
+        "poste": "teacher",
+        "createdAt": "2021-04-11T10:40:08.000Z",
+        "updatedAt": "2021-04-11T10:40:08.000Z",
+        "PersonelId": 1
+      },
+      {
+        "id": 2,
+        "title": "offre d'emploi",
+        "description": "Ad impedit qui officiis est in non aliquid veniam laborum. Id ipsum qui aut. Sit aliquam et quia molestias laboriosam. Tempora nam odit omnis eum corrupti qui aliquid excepturi molesti",
+        "deadline": "2012-04-23T18:25:43.000Z",
+        "avatar": "uploads/user.png",
+        "poste": "45555",
+        "createdAt": "2021-04-11T10:39:15.000Z",
+        "updatedAt": "2021-04-11T10:39:15.000Z",
+        "PersonelId": 1
+      }
+    ]
+  };
   path = "http://localhost:3000/api";
   /**
    * Option http
@@ -36,16 +139,15 @@ export class UserService {
 
   /**
   * Get all skills
-  * @param element 
   */
   getAllSkills() {
-    return this.http.get(this.path+"/skill/all").pipe(retry(2),
+    return this.http.get(this.path + "/skill/all").pipe(retry(2),
       catchError(this.traitementErreur));
   }
 
   /**
   * Add Teacher
-  * @param element 
+  * @param data 
   */
   addEnseignant(data) {
     const options = this.createRequestOptions();
@@ -56,9 +158,9 @@ export class UserService {
 
   /**
   * Add Stuff
-  * @param element 
+  * @param data 
   */
-   addPersonel(data) {
+  addPersonel(data) {
     const options = this.createRequestOptions();
     return this.http.post(this.path + "/personel/new", JSON.stringify(data), { headers: options }).
       pipe(retry(2),
@@ -67,11 +169,11 @@ export class UserService {
 
   /**
    * Login stuff
-   * @param element 
+   * @param data 
    */
-   stuffLogin(data) {
+  stuffLogin(data) {
     const options = this.createRequestOptions();
-    return this.http.post(this.path+"/auth/stuff", JSON.stringify(data), { headers: options }).
+    return this.http.post(this.path + "/auth/stuff", JSON.stringify(data), { headers: options }).
       pipe(retry(2),
         catchError(this.traitementErreur))
   }
@@ -80,10 +182,115 @@ export class UserService {
    * Login teacher
    * @param element 
    */
-   teacherLogin(data) {
+  teacherLogin(data) {
     const options = this.createRequestOptions();
-    return this.http.post(this.path+"/auth/teacher", JSON.stringify(data), { headers: options }).
+    return this.http.post(this.path + "/auth/teacher", JSON.stringify(data), { headers: options }).
+      pipe(retry(2),
+        catchError(this.traitementErreur))
+  }
+
+  /**
+  * Get all offre
+  * @param element 
+  */
+  getAlloffre() {
+    return this.http.get(this.path + "/offre/all").pipe(retry(2),
+      catchError(this.traitementErreur));
+  }
+
+  getUserData() {
+    return this.userData;
+  }
+
+  setAdminData(data) {
+    this.userData = data;
+  }
+
+  /**
+   * Update Image
+   * @param element 
+   */
+  UpdateImageStuff(data) {
+
+    const formData = new FormData();
+    formData.append('file', data)
+    const options = this.createRequestOptions();
+    return this.http.post(this.path + "/stuff/file", formData)
+  }
+
+  /**
+   * Update Image
+   * @param element 
+   */
+  UpdateImageTeacher(data, id) {
+
+    const formData = new FormData();
+    formData.append('file', data)
+    const options = this.createRequestOptions();
+    return this.http.post(this.path + "/teacher/file/" + id, formData)
+  }
+
+  /**
+   * update Teacher
+   * @param element 
+   * @param id 
+   */
+  updateUserTeacher(data, id: number) {
+    const options = this.createRequestOptions();
+    return this.http.put(this.path + "/teacher/update/" + id, JSON.stringify(data), { headers: options }).
+      pipe(retry(2),
+        catchError(this.traitementErreur))
+  }
+
+  /**
+   * update Stuff
+   * @param element 
+   * @param id 
+   */
+  updateUserStuff(data, id: number) {
+    const options = this.createRequestOptions();
+    return this.http.put(this.path + "/stuff/update/" + id, JSON.stringify(data), { headers: options }).
+      pipe(retry(2),
+        catchError(this.traitementErreur))
+  }
+
+  /**
+   * 
+   * @returns 
+   */
+  getOffresUser() {
+    return this.userData.offres;
+  }
+
+  /**
+  * Add Offre
+  * @param data 
+  */
+  addOffre(data) {
+    console.log(data);
+    const options = this.createRequestOptions();
+    return this.http.post(this.path + "/offre/new/" + this.userData.id, JSON.stringify(data), { headers: options }).
+      pipe(retry(2),
+        catchError(this.traitementErreur))
+  }
+
+  /**
+   * 
+   * @returns 
+   */
+  getAllTeachers() {
+    return this.http.get(this.path + "/teacher/all").pipe(retry(2),
+      catchError(this.traitementErreur));
+  }
+
+  /**
+   * 
+   */
+  findTeacherBySkills(element) {
+    const options = this.createRequestOptions();
+    return this.http.post(this.path + "/teacher/search", JSON.stringify(element), { headers: options }).
       pipe(retry(2),
         catchError(this.traitementErreur))
   }
 }
+

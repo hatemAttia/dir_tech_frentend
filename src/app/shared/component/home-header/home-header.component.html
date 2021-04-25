@@ -1,0 +1,32 @@
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top" style="background: black; color: white;">
+    <div class="container d-flex align-items-center">
+
+        <h1 class="logo mr-auto"><a href="index.html">EPI</a></h1>
+        <!-- Uncomment below if you prefer to use an image logo -->
+        <!-- <a href="index.html" class="logo mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
+
+        <nav class="nav-menu d-none d-lg-block">
+            <ul>
+                <li class="active"><a [routerLink]="['/home/offers']" routerLinkActive="router-link-active">Home</a></li>
+                <li><a (click)="scrollToElement('offer')">offer</a></li>
+
+                <li><a [routerLink]="['/home/teacher']">Contact</a></li>
+                <li><a [routerLink]="['/home/teacher']">Teacher</a></li>
+                <li>
+                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
+                        <span class="notification">Account</span>
+
+                    </a>
+                    <ul class="dropdown-menu">
+                        <button class="dropdown-item" [routerLink]="['/home/profil']">Profil</button>
+                        <button class="dropdown-item" (click)="logout()">Logout</button>
+                        <button class="dropdown-item" href="#">Another notification</button>
+                    </ul>
+                </li>
+            </ul>
+        </nav>
+        <!-- .nav-menu -->
+    </div>
+</header>
+<!-- End Header -->

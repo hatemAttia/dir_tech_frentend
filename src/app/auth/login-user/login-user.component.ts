@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
@@ -14,6 +15,7 @@ export class LoginUserComponent implements OnInit {
   loginForm: FormGroup;
   constructor(
     public userServ: UserService,
+    public authServ:AuthService,
     private router: Router,
     private formBuilder: FormBuilder) {
     this.loginForm = this.formBuilder.group({
@@ -25,7 +27,9 @@ export class LoginUserComponent implements OnInit {
   }
 
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.authServ.login("ROLE_TEACHER");
+  }
 
   /**
  * Navigation
@@ -49,7 +53,9 @@ export class LoginUserComponent implements OnInit {
         this.userServ.stuffLogin(this.loginForm.value).subscribe(res => {
           this.valid = false;
           console.log(res)
-     //     this.navigateTo("admin/home");
+          this.authServ.login("ROLE_STUFF");
+          this.userServ.setAdminData(res);
+          this.navigateTo("home/offers");
         },
           error => {
             console.log(error);
@@ -59,7 +65,10 @@ export class LoginUserComponent implements OnInit {
         this.userServ.teacherLogin(this.loginForm.value).subscribe(res => {
           console.log(res)
           this.valid = false;
-  //        this.navigateTo("admin/home");
+          console.log(res)
+          this.authServ.login("ROLE_TEACHER");
+          this.userServ.setAdminData(res);
+          this.navigateTo("home/offers");
         },
           error => {
             console.log(error);

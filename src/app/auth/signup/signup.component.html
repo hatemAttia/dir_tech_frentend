@@ -2,17 +2,12 @@
 <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="bower_components/angular-bootstrap-multiselect/dist/angular-bootstrap-multiselect.min.js"></script>
-
 <!------ Include the above in your HEAD tag ---------->
-
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
 
 
-<div style="padding: 100px 0px;width: 100%; background:url(assets/img/bg-epi.png); height: 175%; background-attachment: fixed;">
-
-
-
-    <div class="row justify-content-center">
+<div style="padding: 100px 0px;width: 100%; background:url(assets/img/epi.png); height: 175%; background-attachment: fixed;">
+    <div class="row justify-content-center" style="margin: 0 !important">
         <div class="col-md-6">
             <div class="card">
                 <header class="card-header ">
@@ -67,9 +62,8 @@
                             <div class="form-group col" *ngIf="userType=='Stuff'">
                                 <label>Poste</label>
                                 <select id="inputState" class="form-control" formControlName="poste">
-                              <option *ngFor="let option of options" > {{option}}</option>
-
-                            </select>
+                                  <option *ngFor="let option of options" > {{option}}</option>
+                                </select>
                             </div>
                         </div>
                         <!-- end Form stuff -->
@@ -78,8 +72,7 @@
                             <div class="form-group col-md-6">
                                 <label>Level</label>
                                 <select id="inputState" class="form-control" formControlName="level">
-                                  <option *ngFor="let option of options" > {{option}}</option>
-                                   
+                                  <option *ngFor="let option of options" > {{option}}</option>   
                                 </select>
                             </div>
                             <div class="form-group col-md-6">

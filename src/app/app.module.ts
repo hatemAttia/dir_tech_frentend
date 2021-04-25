@@ -20,6 +20,17 @@ import { LoginUserComponent } from './auth/login-user/login-user.component';
 import { TeaherListComponent } from './admin/teaher-list/teaher-list.component';
 import { SerchTeacherPipe } from './shared/pipes/serch-teacher.pipe';
 import { ProfilAdminComponent } from './admin/profil-admin/profil-admin.component';
+import { HomeStuffComponent } from './home/home-stuff/home-stuff.component';
+import { HomeTeacherComponent } from './home/home-teacher/home-teacher.component';
+import { JwtHelperService, JWT_OPTIONS  } from '@auth0/angular-jwt';
+import { HomeHeaderComponent } from './shared/component/home-header/home-header.component';
+import { HomeFooterComponent } from './shared/component/home-footer/home-footer.component';
+import { OffreListComponent } from './home/offre-list/offre-list.component';
+import { ProfilComponent } from './home/profil/profil.component';
+import { AddOfferComponent } from './home/add-offer/add-offer.component';
+import { ModalAddOffreComponent } from './shared/modal-add-offre/modal-add-offre.component';
+import {NgxPaginationModule} from 'ngx-pagination'; 
+
 @NgModule({
   
   declarations: [
@@ -35,16 +46,26 @@ import { ProfilAdminComponent } from './admin/profil-admin/profil-admin.componen
     LoginUserComponent,
     TeaherListComponent,
     SerchTeacherPipe,
-    ProfilAdminComponent
+    ProfilAdminComponent,
+    HomeStuffComponent,
+    HomeTeacherComponent,
+    HomeHeaderComponent,
+    HomeFooterComponent,
+    OffreListComponent,
+    ProfilComponent,
+    AddOfferComponent,
+    ModalAddOffreComponent
   ],
   imports: [
+    NgxPaginationModule,
     NgMultiSelectDropDownModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
     RouterModule.forRoot(routes) ],
-  providers: [],
+  providers: [  { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
+    JwtHelperService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

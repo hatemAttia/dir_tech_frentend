@@ -1,0 +1,134 @@
+<div class="content" style="padding-top: 150px;">
+    <div class="container-fluid">
+        <div class="section-title">
+            <h3>Profil </h3>
+        </div>
+        <div class="row col-md ">
+            <div class="col-md-8 d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 class="card-title">Edit Profile</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="profilForm">
+                            <div class="row">
+                                <div class="col-md-5 pr-1">
+                                    <div class="form-group">
+                                        <label>Email address</label>
+                                        <input type="text" class="form-control" disabled="" placeholder="email" value=" {{userData.email}}">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-1">
+                                    <div class="form-group">
+                                        <label>Cin</label>
+                                        <input type="text" formControlName="cin" class="form-control" placeholder="Cin">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pl-1">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">Phone Number</label>
+                                        <input type="number" class="form-control" formControlName="phonenumber" placeholder="phonenumber">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 pr-1">
+                                    <div class="form-group">
+                                        <label>First Name</label>
+                                        <input type="text" class="form-control" placeholder="Company" formControlName="firstname">
+                                    </div>
+                                </div>
+                                <div class=" col-md-6 pl-1 ">
+                                    <div class="form-group ">
+                                        <label>Last Name</label>
+                                        <input type="text " class="form-control " placeholder="Last Name " formControlName="lastname">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ========= Teacher form ========== -->
+                            <div class="row" *ngIf="userConnected=='ROLE_TEACHER'">
+                                <div class="col-md-6 pr-1">
+                                    <div class="form-group">
+                                        <label>matricule</label>
+                                        <input type="text" class="form-control" placeholder="Company" formControlName="matricule">
+                                    </div>
+                                </div>
+                                <div class=" col-md-6 pl-1 ">
+                                    <div class="form-group ">
+                                        <label>Lavel</label>
+                                        <select id="inputState" class="form-control" formControlName="level">
+                                            <option *ngFor="let option of options" > {{option}}</option>   
+                                          </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row" *ngIf="userConnected=='ROLE_TEACHER'">
+                                <div class="col-md-12 pl-1">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea type="text" class="form-control" placeholder="Company" formControlName="description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ========= end  Teacher form ========== -->
+
+                            <!-- ========= Stuff form ========== -->
+                            <div class="row" *ngIf="userConnected=='ROLE_STUFF'">
+                                <div class="col-md-6 pr-1">
+                                    <div class="form-group">
+                                        <label>matricule</label>
+                                        <select id="inputState" class="form-control" formControlName="poste">
+                                            <option *ngFor="let option of options" > {{option}}</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class=" col-md-6 pl-1 ">
+                                    <div class="form-group ">
+                                        <label>Lavel</label>
+                                        <input type="text " class="form-control " placeholder="Last Name " formControlName="level">
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ========= end  stuff form ========== -->
+                            <div class="text-center alert alert-success opacity" role="alert" *ngIf="userUploaded">
+                                User Uploaded
+                            </div>
+                            <button type="submit " class="btn btn-info btn-fill pull-right" (click)="updateUser() ">Update Profile</button>
+                            <div class="clearfix "></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 ">
+                <div class="card card-user ">
+                    <div class="card-image ">
+                        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400 " alt="... ">
+                    </div>
+                    <div class="card-body ">
+                        <div class="author ">
+                            <a>
+                                <img class="avatar border-gray " [src]="image " alt="... ">
+                                <h5 class="title ">Mike Andrew</h5>
+                            </a>
+                            <p class="description ">
+                                {{userData.lastname}} {{userData.firstname}}
+                            </p>
+                        </div>
+                        <p class="description text-center">
+                            {{userData.description}}
+                        </p>
+                    </div>
+                    <hr>
+                    <div class="button-container mr-auto ml-auto ">
+                        <input type="file" id="img" name="img " accept="image/* " (change)="onFileChanged($event) " class="form-control " />
+
+                        <div class="text-center alert alert-success opacity" role="alert" *ngIf="imageImageUploaded">
+                            Image Uploaded
+                        </div>
+                        <button type=" submit " class="btn btn-info btn-fill pull-right " (click)="onUpload() ">Update image</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

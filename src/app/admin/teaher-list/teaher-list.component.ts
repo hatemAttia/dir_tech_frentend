@@ -9,10 +9,10 @@ import { AdminService } from 'src/app/shared/services/admin.service';
 })
 export class TeaherListComponent implements OnInit {
   listTeacher;
-  serchName='';
+  searchName='';
   tSearch=false;
   constructor( public adminServ: AdminService,
-    private router: Router,) { }
+    private router: Router) { }
 
 
   ngOnInit() {
