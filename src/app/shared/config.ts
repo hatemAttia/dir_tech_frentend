@@ -1,7 +1,10 @@
 import { Routes, CanActivate } from '@angular/router';
 import { HomeComponent } from "src/app/home/home.component";
 import { HomeAdminComponent } from "../admin/home-admin/home-admin.component";
+import { OffreControllerComponent } from '../admin/offre-controller/offre-controller.component';
 import { ProfilAdminComponent } from "../admin/profil-admin/profil-admin.component";
+import { SkillControllerComponent } from '../admin/skill-controller/skill-controller.component';
+import { StuffControllerComponent } from '../admin/stuff-controller/stuff-controller.component';
 import { TeaherListComponent } from "../admin/teaher-list/teaher-list.component";
 import { LoginAdminComponent } from "../auth/login-admin/login-admin.component";
 import { LoginUserComponent } from "../auth/login-user/login-user.component";
@@ -26,8 +29,19 @@ export const routes: Routes = [
                 component: TeaherListComponent
             },
             {
+                path: 'offre',
+                component: OffreControllerComponent
+            },
+            {
                 path: 'profil',
                 component: ProfilAdminComponent
+            },
+            {
+                path: 'stuff',
+                component: StuffControllerComponent
+            }, {
+                path: 'skill',
+                component: SkillControllerComponent
             }]
     },
     { path: '', redirectTo: '/home/offers', pathMatch: 'full' },

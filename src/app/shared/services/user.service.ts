@@ -162,7 +162,7 @@ export class UserService {
   */
   addPersonel(data) {
     const options = this.createRequestOptions();
-    return this.http.post(this.path + "/personel/new", JSON.stringify(data), { headers: options }).
+    return this.http.post(this.path + "/stuff/new", JSON.stringify(data), { headers: options }).
       pipe(retry(2),
         catchError(this.traitementErreur))
   }
@@ -255,7 +255,7 @@ export class UserService {
   }
 
   /**
-   * 
+   * get Offres User
    * @returns 
    */
   getOffresUser() {
@@ -275,7 +275,7 @@ export class UserService {
   }
 
   /**
-   * 
+   * get All Teachers
    * @returns 
    */
   getAllTeachers() {
@@ -284,7 +284,17 @@ export class UserService {
   }
 
   /**
-   * 
+   * get All Teachers
+   * @returns 
+   */
+   getAllStuff() {
+    return this.http.get(this.path + "/stuff/all").pipe(retry(2),
+      catchError(this.traitementErreur));
+  }
+
+
+  /**
+   * find Teacher By Skills
    */
   findTeacherBySkills(element) {
     const options = this.createRequestOptions();
@@ -292,5 +302,7 @@ export class UserService {
       pipe(retry(2),
         catchError(this.traitementErreur))
   }
+
+  
 }
 

@@ -28,7 +28,6 @@ export class LoginUserComponent implements OnInit {
 
 
   ngOnInit() { 
-    this.authServ.login("ROLE_TEACHER");
   }
 
   /**

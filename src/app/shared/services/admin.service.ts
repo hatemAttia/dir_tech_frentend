@@ -89,6 +89,34 @@ export class AdminService {
       catchError(this.traitementErreur));
   }
 
+  /**
+   *  Add skill
+   * @param data 
+   * @returns 
+   */
+  addSkill(data){
+    const options = this.createRequestOptions();
+    return this.http.post(this.path + "/skill/new", JSON.stringify(data), { headers: options }).
+      pipe(retry(2),
+        catchError(this.traitementErreur))
+  }
+  
+  updateSkill(data,id){
+    const options = this.createRequestOptions();
+    return this.http.put(this.path + "/skill/update/" + id, JSON.stringify(data), { headers: options }).
+      pipe(retry(2),
+        catchError(this.traitementErreur))
+  
+  }
+
+  DeleteSkill(id){
+    console.log(id);
+    const options = this.createRequestOptions();
+    return this.http.delete(this.path + "/skill/delete/" + parseInt(id), { headers: options }).
+      pipe(retry(2),
+        catchError(this.traitementErreur))
+  }
+
   getAdminID() {
     return this.adminID;
   }

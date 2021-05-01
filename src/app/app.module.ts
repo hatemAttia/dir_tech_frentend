@@ -29,7 +29,11 @@ import { OffreListComponent } from './home/offre-list/offre-list.component';
 import { ProfilComponent } from './home/profil/profil.component';
 import { AddOfferComponent } from './home/add-offer/add-offer.component';
 import { ModalAddOffreComponent } from './shared/modal-add-offre/modal-add-offre.component';
-import {NgxPaginationModule} from 'ngx-pagination'; 
+import {NgxPaginationModule} from 'ngx-pagination';
+import { OffreControllerComponent } from './admin/offre-controller/offre-controller.component';
+import { StuffControllerComponent } from './admin/stuff-controller/stuff-controller.component';
+import { SkillControllerComponent } from './admin/skill-controller/skill-controller.component';
+import { SearchSkillPipe } from './shared/pipes/search-skill.pipe';
 
 @NgModule({
   
@@ -54,7 +58,11 @@ import {NgxPaginationModule} from 'ngx-pagination';
     OffreListComponent,
     ProfilComponent,
     AddOfferComponent,
-    ModalAddOffreComponent
+    ModalAddOffreComponent,
+    OffreControllerComponent,
+    StuffControllerComponent,
+    SkillControllerComponent,
+    SearchSkillPipe,
   ],
   imports: [
     NgxPaginationModule,

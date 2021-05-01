@@ -1,0 +1,69 @@
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card strpied-tabled-with-hover">
+                    <div class="card-header ">
+                        <h4 class="card-title">Teacher List</h4>
+                        <div style="float: right; display: flex;">
+                            <input type="search" [(ngModel)]="searchName" style=" margin-top: 5px;" *ngIf="tSearch" class="form-control" placeholder="Name" value=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a _ngcontent-htr-c55=" " class="btn btn-outline mt-1 " (click)="toggleSearch()">
+                                <i class="nc-icon nc-zoom-split "></i>&nbsp;&nbsp;Search</a>
+                        </div>
+                    </div>
+                    <div class="card-body table-full-width table-responsive ">
+                        <table class="table table-hover table-striped ">
+                            <thead>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Name</th>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let stuff of listStuff | searchSkill: searchName">
+                                    <td>{{stuff.id}}</td>
+                                    <td>{{stuff.name}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-warning" (click)=toggleUpdate(stuff)>UPDATE</button>&nbsp;
+                                        <button type="button" class="btn btn-danger" (click)=DeleteSkill(stuff)>DELETE</button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- ==================================Update Skill ================================ -->
+                    <div *ngIf="addToggle" class="card col-md-6" style="margin-left: 20px;">
+                        <div class="card-header">
+                            <h4 class="card-title">Edit Skill</h4>
+                        </div>
+                        <div class="card-body">
+                            <button type="button" aria-hidden="true" class="close notif-button" (click)="closeUpdateBlock()"><i class="nc-icon nc-simple-remove"></i></button>
+
+                            <div class="row ">
+                                <div class="px-1">
+                                    <div class="form-group">
+                                        <label>Skill</label>
+                                        <input type="text" class="form-control" [(ngModel)]="skillName" placeholder="SkillName">
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-warning" (click)="updateSkill()">UPDATE</button>&nbsp;
+                            <div class="clearfix "></div>
+
+                        </div>
+                    </div>
+                    <!-- ==================================Add Skill ================================ -->
+                    <div *ngIf="!addToggle" class="col-md-5 pr-1" style="float: right; display: flex;margin-bottom: 50px;">
+                        <input type="search" [(ngModel)]="skillName" style=" margin-top: 5px;" class="form-control" placeholder="Skill name" value=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a _ngcontent-htr-c55=" " class="btn btn-outline-success mt-1 " (click)="addSkill()">
+                            <i class="nc-icon nc-simple-add  "></i> &nbsp;&nbsp;ADD
+                        </a>
+                    </div>
+                    <div *ngIf="notifToggle" class=" notif-container col-11 col-sm-4 alert alert-success alert-with-icon" role="alert">
+                        <button type="button" aria-hidden="true" class="close" (click)="closeNotif()"><i class="nc-icon nc-simple-remove"></i></button>
+                        <span data-notify="icon" class="nc-icon nc-app"></span>
+                        <span data-notify="title">{{notifBody}}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

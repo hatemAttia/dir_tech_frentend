@@ -5,7 +5,7 @@
       </a>
     </div>
     <ul class="nav">
-        <li class="nav-item active">
+        <li class="nav-item active" (click)="navigateTo('admin/profil')">
             <a class="nav-link" href="dashboard.html">
                 <i class="nc-icon nc-chart-pie-35"></i>
                 <p>Dashboard</p>
@@ -23,10 +23,22 @@
                 <p>Teacher</p>
             </a>
         </li>
-        <li>
-            <a class="nav-link" href="./typography.html">
+        <li (click)="navigateTo('admin/offre')">
+            <a class="nav-link">
                 <i class="nc-icon nc-paper-2"></i>
-                <p>Typography</p>
+                <p>Offre</p>
+            </a>
+        </li>
+        <li (click)="navigateTo('admin/stuff')">
+            <a class="nav-link">
+                <i class="nc-icon nc-paper-2"></i>
+                <p>Stuff</p>
+            </a>
+        </li>
+        <li (click)="navigateTo('admin/skill')">
+            <a class="nav-link">
+                <i class="nc-icon nc-paper-2"></i>
+                <p>skill</p>
             </a>
         </li>
         <li>
