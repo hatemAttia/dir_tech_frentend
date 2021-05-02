@@ -12,8 +12,10 @@ import { SignupComponent } from "../auth/signup/signup.component";
 import { AddOfferComponent } from '../home/add-offer/add-offer.component';
 import { HomeStuffComponent } from '../home/home-stuff/home-stuff.component';
 import { HomeTeacherComponent } from '../home/home-teacher/home-teacher.component';
+import { ListFavoriteComponent } from '../home/list-favorite/list-favorite.component';
 import { OffreListComponent } from '../home/offre-list/offre-list.component';
 import { ProfilComponent } from '../home/profil/profil.component';
+import { SingleOffreComponent } from '../home/single-offre/single-offre.component';
 import { AuthGuard } from './services/auth.guard';
 
 export const routes: Routes = [
@@ -64,8 +66,16 @@ export const routes: Routes = [
                 component: ProfilComponent
             },
             {
+                path: 'favorite',
+                component: ListFavoriteComponent
+            },
+            {
                 path: 'add-offer',
                 component: AddOfferComponent
+            },
+            {
+                path: 'single-offre',
+                component: SingleOffreComponent
             },
             {
                 path: 'offers',

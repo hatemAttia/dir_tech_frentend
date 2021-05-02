@@ -34,6 +34,8 @@ import { OffreControllerComponent } from './admin/offre-controller/offre-control
 import { StuffControllerComponent } from './admin/stuff-controller/stuff-controller.component';
 import { SkillControllerComponent } from './admin/skill-controller/skill-controller.component';
 import { SearchSkillPipe } from './shared/pipes/search-skill.pipe';
+import { SingleOffreComponent } from './home/single-offre/single-offre.component';
+import { ListFavoriteComponent } from './home/list-favorite/list-favorite.component';
 
 @NgModule({
   
@@ -63,6 +65,8 @@ import { SearchSkillPipe } from './shared/pipes/search-skill.pipe';
     StuffControllerComponent,
     SkillControllerComponent,
     SearchSkillPipe,
+    SingleOffreComponent,
+    ListFavoriteComponent,
   ],
   imports: [
     NgxPaginationModule,

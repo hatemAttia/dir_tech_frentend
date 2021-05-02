@@ -7,8 +7,32 @@ import { Observable, throwError } from 'rxjs';
   providedIn: 'root'
 })
 export class UserService {
-
-  constructor(private http: HttpClient) { }
+  favoritesList = [];
+  blogOffre = {
+    "id": 2,
+    "title": "offre d'emploi",
+    "description": "Ad impedit qui officiis est in non aliquid veniam laborum. Id ipsum qui aut. Sit aliquam et quia molestias laboriosam. Tempora nam odit omnis eum corrupti qui aliquid excepturi molesti",
+    "deadline": "2012-04-23T18:25:43.000Z",
+    "avatar": "uploads/user.png",
+    "poste": "45555",
+    "createdAt": "2021-04-11T10:39:15.000Z",
+    "updatedAt": "2021-04-11T10:39:15.000Z",
+    "PersonelId": 1,
+    "Personel": {
+      "id": 1,
+      "firstname": "bassma",
+      "lastname": "cc",
+      "email": "basma@gmail.com",
+      "cin": 4552266,
+      "password": "XBCyiTFezXo+pwTsZ58hO8dUDKrSxlz9m7dLnuyNaFZEVVtDVn4oe3QEAjiGOaD4",
+      "phonenumber": 12111112,
+      "matricule": "sdq222",
+      "avatar": "uploads/user.png",
+      "poste": "Teacher",
+      "createdAt": "2021-04-11T10:38:30.000Z",
+      "updatedAt": "2021-04-11T21:03:16.000Z"
+    }
+  };
   userData = {
     "id": 1,
     "firstname": "bassma",
@@ -114,6 +138,10 @@ export class UserService {
     ]
   };
   path = "http://localhost:3000/api";
+
+  constructor(private http: HttpClient) { }
+
+
   /**
    * Option http
    */
@@ -287,7 +315,7 @@ export class UserService {
    * get All Teachers
    * @returns 
    */
-   getAllStuff() {
+  getAllStuff() {
     return this.http.get(this.path + "/stuff/all").pipe(retry(2),
       catchError(this.traitementErreur));
   }
@@ -303,6 +331,56 @@ export class UserService {
         catchError(this.traitementErreur))
   }
 
-  
+  /**
+     * 
+     * @param data get favorite
+     * @returns 
+     */
+  getFavorites() {
+    return JSON.parse(localStorage.getItem('favorites'));
+  }
+
+  /**
+   * 
+   * @param data add favorite
+   * @returns 
+   */
+  addFavorite(data: any) {
+    var message;
+    this.favoritesList = this.getFavorites();
+    const found = this.favoritesList.find(element => element.id == data.id);
+    if (!found) {
+      this.favoritesList.push(data);
+      localStorage.setItem('favorites', JSON.stringify(this.favoritesList));
+      return message = "teacher add in list favorie ,check list"
+    }
+    return message = "already favorite"
+  }
+
+  /**
+  * 
+  * @param data dlete favorite
+  * @returns 
+  */
+  DeleteFavorite(id) {
+    this.favoritesList = this.getFavorites();
+    this.favoritesList.forEach((element, index) => {
+      if (element.id == id) {
+        this.favoritesList.splice(index, 1);
+      }
+    });
+    localStorage.setItem('favorites', JSON.stringify(this.favoritesList));
+
+  }
+
+
+
+  setBlogOffre(data) {
+    this.blogOffre = data;
+  }
+
+  getBlogOffre() {
+    return this.blogOffre;
+  }
 }
 

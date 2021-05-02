@@ -7,9 +7,11 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./home-teacher.component.css']
 })
 export class HomeTeacherComponent implements OnInit {
+  notifToggle =false;
   listTeachers;
   ListallTeacher;
   searchName='';
+  notifBody;
   skill = "tous";
   p:number;
   options = [{ id: 0, name: "tous", createdAt: "2021-04-27T11:35:00.000Z", updatedAt: "2021-04-13T11:35:00.000Z" }];
@@ -23,6 +25,7 @@ export class HomeTeacherComponent implements OnInit {
     this.userServ.getAllTeachers().subscribe(resp => {
       this.listTeachers = resp;
       this.ListallTeacher=resp;
+      console.log(resp)
     });
   }
 
@@ -38,5 +41,19 @@ export class HomeTeacherComponent implements OnInit {
     } else {
       //search with both
     }
+  }
+
+  addFavorite(data){
+   this.notifBody = this.userServ.addFavorite(data)
+   console.log(this.notifBody);
+   this.showNotif();
+  }
+
+  showNotif() {
+    this.notifToggle = true;
+  }
+
+  closeNotif() {
+    this.notifToggle = false;
   }
 }

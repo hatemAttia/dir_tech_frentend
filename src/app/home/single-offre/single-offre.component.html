@@ -1,0 +1,107 @@
+<main id="main">
+
+    <!-- ======= Breadcrumbs ======= -->
+    <section id="breadcrumbs" class="breadcrumbs">
+        <div class="container">
+
+            <ol>
+                <li><a [routerLink]="['/home/offers']">Home</a></li>
+                <li><a [routerLink]="['/home/offers']">offre</a></li>
+            </ol>
+            <h2>{{offreData.title}}</h2>
+
+        </div>
+    </section>
+    <!-- End Breadcrumbs -->
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+        <div class="container">
+
+            <div class="row">
+
+                <div class="col-lg-8 entries">
+
+                    <article class="entry entry-single">
+
+                        <div class="entry-img">
+                            <img src="assets/img/blog-1.jpg" alt="" class="img-fluid">
+                        </div>
+
+                        <h2 class="entry-title">
+                            <a href="blog-single.html">{{offreData.title}}</a>
+                        </h2>
+
+                        <div class="entry-meta">
+                            <ul>
+                                <li class="d-flex align-items-center"><i class="nc-icon nc-circle-09 "></i> <a href="blog-single.html">{{offreData.Personel.firstname}} {{offreData.Personel.lastname}}</a></li>
+                                <li class="d-flex align-items-center"><i class="nc-icon nc-time-alarm "></i> <a href="blog-single.html"><time datetime="2020-01-01">{{offreData.deadline}}</time></a></li>
+                                <!-- <li class="d-flex align-items-center"><i class="icofont-comment"></i> <a href="blog-single.html">12</a></li> -->
+                            </ul>
+                        </div>
+
+                        <div class="entry-content">
+                            {{offreData.description}}
+
+
+                        </div>
+
+                        <div class="entry-footer clearfix">
+                            <div class="float-left">
+                                <i class="icofont-folder"></i>
+                                <ul class="cats">
+                                    <li><a href="#"> {{offreData.Personel.poste}}</a></li>
+                                </ul>
+
+
+                            </div>
+
+                            <div class="float-right share">
+                                <a href="" title="Share on Twitter"><i class="icofont-twitter"></i></a>
+                                <a href="" title="Share on Facebook"><i class="icofont-facebook"></i></a>
+                                <a href="" title="Share on Instagram"><i class="icofont-instagram"></i></a>
+                            </div>
+
+                        </div>
+
+                    </article>
+                    <!-- End blog entry -->
+
+                    <div class="blog-author clearfix">
+                        <img [src]="image" class="rounded-circle float-left" alt="">
+                        <h4>{{offreData.Personel.firstname}} {{offreData.Personel.lastname}}</h4>
+                        <div class="social-links">
+                            <a href="https://twitters.com/#"><i class="icofont-twitter"></i></a>
+                            <a href="https://facebook.com/#"><i class="icofont-facebook"></i></a>
+                            <a href="https://instagram.com/#"><i class="icofont-instagram"></i></a>
+                        </div>
+                        <p>
+                            {{offreData.Personel.email}}
+                        </p>
+                        <p>
+                            {{offreData.Personel.phonenumber}}
+                        </p>
+                    </div>
+                    <!-- End blog author bio -->
+
+
+
+
+                </div>
+                <!-- End blog entries list -->
+
+                <div class="col-lg-4">
+
+
+
+                </div>
+                <!-- End blog sidebar -->
+
+            </div>
+
+        </div>
+    </section>
+    <!-- End Blog Section -->
+
+</main>
+<!-- End #main -->
