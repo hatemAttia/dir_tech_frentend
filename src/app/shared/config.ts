@@ -29,21 +29,31 @@ export const routes: Routes = [
             {
                 path: 'teacher',
                 component: TeaherListComponent
+                , canActivate: [AuthGuard],
+                data: { role: 'ROLE_ADMIN' },
             },
             {
                 path: 'offre',
                 component: OffreControllerComponent
+                , canActivate: [AuthGuard],
+                data: { role: 'ROLE_ADMIN' },
             },
             {
                 path: 'profil',
                 component: ProfilAdminComponent
+                , canActivate: [AuthGuard],
+                data: { role: 'ROLE_ADMIN' },
             },
             {
                 path: 'stuff',
                 component: StuffControllerComponent
+                , canActivate: [AuthGuard],
+                data: { role: 'ROLE_ADMIN' },
             }, {
                 path: 'skill',
                 component: SkillControllerComponent
+                , canActivate: [AuthGuard],
+                data: { role: 'ROLE_ADMIN' },
             }]
     },
     { path: '', redirectTo: '/home/offers', pathMatch: 'full' },
@@ -59,7 +69,9 @@ export const routes: Routes = [
             {
 
                 path: 'teacher',
-                component: HomeTeacherComponent
+                component: HomeTeacherComponent,
+                canActivate: [AuthGuard],
+                data: { role: 'ROLE_STUFF' },
             },
             {
                 path: 'profil',
@@ -67,11 +79,15 @@ export const routes: Routes = [
             },
             {
                 path: 'favorite',
-                component: ListFavoriteComponent
+                component: ListFavoriteComponent,
+                canActivate: [AuthGuard]
+                , data: { role: 'ROLE_STUFF' },
             },
             {
                 path: 'add-offer',
-                component: AddOfferComponent
+                component: AddOfferComponent,
+                canActivate: [AuthGuard],
+                data: { role: 'ROLE_STUFF' },
             },
             {
                 path: 'single-offre',

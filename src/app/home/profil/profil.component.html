@@ -76,28 +76,31 @@
                             <div class="row" *ngIf="userConnected=='ROLE_STUFF'">
                                 <div class="col-md-6 pr-1">
                                     <div class="form-group">
-                                        <label>matricule</label>
+                                        <label>Poste</label>
                                         <select id="inputState" class="form-control" formControlName="poste">
-                                            <option *ngFor="let option of options" > {{option}}</option>
+                                            <option *ngFor="let option of options" [selected]="option.selected == profilForm.poste" > {{option}}</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div class=" col-md-6 pl-1 ">
                                     <div class="form-group ">
-                                        <label>Lavel</label>
-                                        <input type="text " class="form-control " placeholder="Last Name " formControlName="level">
+                                        <label>Matricule</label>
+                                        <input type="text " class="form-control " placeholder="poste " formControlName="matricule">
                                     </div>
                                 </div>
                             </div>
                             <!-- ========= end  stuff form ========== -->
-                            <div class="text-center alert alert-success opacity" role="alert" *ngIf="userUploaded">
-                                User Uploaded
+                            <div *ngIf="userUploaded" class=" notif-container col-11 col-sm-12 alert alert-success alert-with-icon" role="alert">
+                                <span data-notify="icon" class="nc-icon nc-app"></span>
+                                <span data-notify="title"> User Updated</span>
                             </div>
-                            <button type="submit " class="btn btn-info btn-fill pull-right" (click)="updateUser() ">Update Profile</button>
+
+                            <button type="submit " class="btn btn-danger btn-fill pull-right" (click)="updateUser() ">Update Profile</button>
                             <div class="clearfix "></div>
                         </form>
                     </div>
                 </div>
+
             </div>
             <div class="col-md-4 ">
                 <div class="card card-user ">
@@ -119,16 +122,63 @@
                         </p>
                     </div>
                     <hr>
+                    <div *ngIf="imageImageUploaded" class=" notif-container col-11 col-sm-12 alert alert-success alert-with-icon" role="alert">
+                        <button type="button" aria-hidden="true" class="close" (click)="closeNotif()"><i class="nc-icon nc-simple-remove"></i></button>
+                        <span data-notify="icon" class="nc-icon nc-app"></span>
+                        <span data-notify="title"> Image Uploaded</span>
+                    </div>
                     <div class="button-container mr-auto ml-auto ">
                         <input type="file" id="img" name="img " accept="image/* " (change)="onFileChanged($event) " class="form-control " />
-
-                        <div class="text-center alert alert-success opacity" role="alert" *ngIf="imageImageUploaded">
-                            Image Uploaded
-                        </div>
-                        <button type=" submit " class="btn btn-info btn-fill pull-right " (click)="onUpload() ">Update image</button>
+                        <button type="submit" class="btn btn-danger btn-fill pull-right" (click)="onUpload() ">Update image</button>
                     </div>
                 </div>
             </div>
+            <div class="col-md-8 d-flex justify-content-center" *ngIf="userConnected=='ROLE_TEACHER'">
+                <div class="card" style="width: 100%;">
+                    <div class="card-header">
+                        <h4 class="card-title">Votre Comptance</h4>
+                    </div>
+                    <div class="card-body">
+                        <form [formGroup]="profilForm">
+                            <div class="row">
+                                <div class="col-md-3 ">
+                                    <div class="form-group ">
+                                        <label>ajouter un </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group ">
+                                        <div class="form-group col-md-11" style="padding-top: 2.5px;">
+                                            <ng-multiselect-dropdown formControlName="skill" [placeholder]="'Competance'" [settings]="dropdownSettings" [data]="dropdownList" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                            </ng-multiselect-dropdown>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-3">
+                                    <button type="submit" class="btn btn-danger btn-fill" (click)="addSkills() ">Ajouter Competance</button>
+                                </div>
+                            </div>
+                            <div class="row " *ngFor="let skill of userData.skills ">
+                                <div class="col-md-11 ">
+                                    <div class="form-group ">
+                                        <label>{{skill.name}} </label>
+                                    </div>
+                                </div>
+                                <div class="col-md-1 ">
+                                    <div class="d-flex ajustify-content-center ">
+                                        <div (click)=removeskills(skill.id) style="cursor:pointer;">
+                                            <img src="assets/img/trash-can.png " style="height: 30px; ">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 d-flex justify-content-center "></div>
+
         </div>
+
+
     </div>
-</div>

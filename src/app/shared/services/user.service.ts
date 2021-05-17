@@ -135,6 +135,31 @@ export class UserService {
         "updatedAt": "2021-04-11T10:39:15.000Z",
         "PersonelId": 1
       }
+    ], "skills": [
+      {
+        "id": 1,
+        "name": "angular",
+        "createdAt": "2021-04-27T11:35:00.000Z",
+        "updatedAt": "2021-04-28T14:21:06.000Z",
+        "Enseignant_skill": {
+          "EnseignantId": 1,
+          "skillId": 1,
+          "createdAt": "2021-04-11T19:54:36.000Z",
+          "updatedAt": "2021-04-11T19:54:36.000Z"
+        }
+      },
+      {
+        "id": 2,
+        "name": "nodeJs",
+        "createdAt": "2021-03-11T20:05:40.000Z",
+        "updatedAt": "2021-03-10T20:05:40.000Z",
+        "Enseignant_skill": {
+          "EnseignantId": 1,
+          "skillId": 2,
+          "createdAt": "2021-04-11T19:54:36.000Z",
+          "updatedAt": "2021-04-11T19:54:36.000Z"
+        }
+      }
     ]
   };
   path = "http://localhost:3000/api";
@@ -227,10 +252,12 @@ export class UserService {
   }
 
   getUserData() {
+    this.userData= JSON.parse(localStorage.getItem('userdata'));
     return this.userData;
   }
 
-  setAdminData(data) {
+  setUserData(data) {
+    localStorage.setItem('userdata', JSON.stringify(data));
     this.userData = data;
   }
 
@@ -238,12 +265,12 @@ export class UserService {
    * Update Image
    * @param element 
    */
-  UpdateImageStuff(data) {
+  UpdateImageStuff(data,id) {
 
     const formData = new FormData();
     formData.append('file', data)
     const options = this.createRequestOptions();
-    return this.http.post(this.path + "/stuff/file", formData)
+    return this.http.post(this.path + "/stuff/file/" +id , formData)
   }
 
   /**
@@ -359,7 +386,7 @@ export class UserService {
 
   /**
   * 
-  * @param data dlete favorite
+  * @param data delete favorite
   * @returns 
   */
   DeleteFavorite(id) {
@@ -370,10 +397,41 @@ export class UserService {
       }
     });
     localStorage.setItem('favorites', JSON.stringify(this.favoritesList));
-
   }
 
+  /**
+   * add skill to teacher
+   * @param element 
+   * @returns 
+   */
+  addSkillToTeacher(element) {
+    console.log(element);
+    const options = this.createRequestOptions();
+    return this.http.post(this.path + "/teacher/addskill/" + this.userData.id, JSON.stringify(element), { headers: options }).
+      pipe(retry(2),
+        catchError(this.traitementErreur))
+  }
 
+  /**
+   * remove skill to teacher
+   * @param ids 
+   * @returns 
+   */
+   removeSkillInTeacher(ids){
+    console.log(ids);
+    const options = this.createRequestOptions();
+    return this.http.post(this.path + "/teacher/deleteskill" ,JSON.stringify(ids), { headers: options }).
+      pipe(retry(2),
+        catchError(this.traitementErreur))
+  }
+
+  /**
+   * 
+   */
+  getUserDataFromDB(){
+   return this.http.get(this.path + "/teacher/"+this.userData.id).pipe(retry(2),
+    catchError(this.traitementErreur))
+  }
 
   setBlogOffre(data) {
     this.blogOffre = data;

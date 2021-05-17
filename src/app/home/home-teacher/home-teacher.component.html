@@ -7,7 +7,7 @@
 <section id="team" class="pb-5">
     <div class="container">
 
-        <h5 class="section-title h1">OUR TEAChER</h5>
+        <h5 class="section-title h1">NOTRE PROFESSEUR</h5>
         <div class="row col-md ">
             <div class="col-md-4 d-flex justify-content-center container-search">
                 <div class="input-group">
@@ -18,7 +18,7 @@
                     <select id="inputState" style="margin-right: 20px;" class="form-control" [(ngModel)]="skill">
                         <option *ngFor="let option of options" > {{option.name}}</option>
                       </select>
-                    <input type="search" class="form-control rounded" placeholder="name" [(ngModel)]="searchName" aria-label="Search" aria-describedby="search-addon" />
+                    <input type="search" class="form-control rounded" placeholder="prenom" [(ngModel)]="searchName" aria-label="Search" aria-describedby="search-addon" />
                     <button type="button" (click)="searchTeacher()" class="btn btn-outline-danger">search</button>
                 </div>
             </div>
@@ -53,7 +53,7 @@
                                     <p class="card-text">{{teacher.description}}</p>
                                     <ul class="list-inline">
                                         <li class="list-inline-item" *ngFor="let skill of teacher.skills">
-                                            <p style="color: seagreen;">{{skill.name}}</p>
+                                            <p style="color: #31a2b8;font-weight: 800;">| {{skill.name}}</p>
                                         </li>
                                     </ul>
                                     <a (click)="addFavorite(teacher)" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>

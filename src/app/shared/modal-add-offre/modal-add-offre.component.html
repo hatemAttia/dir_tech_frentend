@@ -11,14 +11,15 @@
                     <div class="col-md-12 d-flex justify-content-center">
                         <div class="card">
                             <div class="card-header">
-                                <h4 class="card-title">Add Offer</h4>
+                                <h4 class="card-title">Ajouter un Offre</h4>
                             </div>
                             <div class="card-body">
+                                <!-- ========= end  offer form ========== -->
                                 <form [formGroup]="offerForm">
                                     <div class="row">
                                         <div class="col-md-5 pr-1">
                                             <div class="form-group">
-                                                <label>Title</label>
+                                                <label>Titre</label>
                                                 <input type="text" class="form-control" placeholder="Ttle" b formControlName="title">
                                             </div>
                                         </div>
@@ -30,7 +31,7 @@
                                         </div>
                                         <div class="col-md-4 pl-1">
                                             <div class="form-group">
-                                                <label for="exampleInputEmail1">Dead Line</label>
+                                                <label for="exampleInputEmail1">date limite</label>
                                                 <input type="date" class="form-control" formControlName="deadline">
                                             </div>
                                         </div>
@@ -43,9 +44,9 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- ========= end  stuff form ========== -->
+                                    <!-- ========= end  offer form ========== -->
                                     <div class="text-center alert alert-success opacity" role="alert" *ngIf="userUploaded">
-                                        Add Offer
+
                                     </div>
                                     <button type="submit " class="btn btn-info btn-danger pull-right" (click)="addOffer() ">Registrer</button>
                                     <div class="clearfix "></div>

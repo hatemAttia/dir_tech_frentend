@@ -11,6 +11,7 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./signup.component.css']
 })
 export class SignupComponent implements OnInit {
+  formBlock = 1;
   userType;
   types;
   dropdownList = [];
@@ -19,6 +20,7 @@ export class SignupComponent implements OnInit {
   valid;
   dropdownSettings: IDropdownSettings = {};
   options = [];
+  
   signupForm: FormGroup;
   constructor(
     public userServ: UserService,
@@ -29,6 +31,7 @@ export class SignupComponent implements OnInit {
         Validators.pattern('^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]{0,10})*@[A-Za-z0-9]+(\\.[A-Za-z0-9]{0,10})*(\\.[A-Za-z]{0,5})$'),
         Validators.required])],
       password: ['', Validators.required],
+      confirmPassword: ['', Validators.required],
       firstname: ['', Validators.required],
       lastname: ['', Validators.required],
       matricule: ['', Validators.required],
@@ -38,7 +41,7 @@ export class SignupComponent implements OnInit {
       description: [''],
       skill: [''],
       poste: [''],
-    });
+    }, { validator: this.checkPasswords });
   }
 
   ngOnInit() {
@@ -47,7 +50,7 @@ export class SignupComponent implements OnInit {
       this.dropdownList = resp;
     });
     this.selectedItems = [];
-    this.dropdownSettings;
+    
     this.dropdownSettings = {
       singleSelection: false,
       idField: 'id',
@@ -101,9 +104,6 @@ export class SignupComponent implements OnInit {
    */
   signup() {
     console.log(this.signupForm.get('phonenumber').valid);
-      
-
-
     if (this.userType == "Teacher") {
       if (!this.signupForm.valid ||
         this.signupForm.get('level').value == "" ||
@@ -115,6 +115,7 @@ export class SignupComponent implements OnInit {
         //add teacher
         this.userServ.addEnseignant(this.signupForm.value).subscribe(resp => {
           console.log(resp);
+          this.navigateTo("home/offer");
         })
       }
     }else{
@@ -125,6 +126,7 @@ export class SignupComponent implements OnInit {
         //add stuff
         this.userServ.addPersonel(this.signupForm.value).subscribe(resp => {
           console.log(resp);
+          this.navigateTo("home/teacher");
         })
       }
     }
@@ -140,4 +142,29 @@ export class SignupComponent implements OnInit {
      navigateTo(path: string) {
       this.router.navigate([path]);
     }
+
+  suiv(){
+    console.log(this.signupForm.get('email').errors);
+    if(!this.signupForm.hasError('notSame') && !this.signupForm.get('email').errors
+     && !this.signupForm.get('firstname').errors && !this.signupForm.get('lastname').errors
+    && !this.signupForm.get('phonenumber').errors )
+    this.formBlock=2;
+  }
+  
+  prev(){
+    this.formBlock=1;
+  }
+
+  
+  /**
+   * Validation for password and confirm password
+   * @param group: FormGroup
+   */
+   checkPasswords(group: FormGroup) {
+    const pass = group.controls.password.value;
+    const confirmPass = group.controls.confirmPassword.value;
+    return pass === confirmPass ? null : { notSame: true };
+  }
+
+  
 }

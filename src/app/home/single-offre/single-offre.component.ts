@@ -7,14 +7,20 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./single-offre.component.css']
 })
 export class SingleOffreComponent implements OnInit {
-  image
-  offreData
-  constructor(private userServ: UserService) { }
+  image;
+  offreData;
+  constructor(private userServ: UserService) {
+    this.offreData = this.userServ.getBlogOffre();
+   
+    setTimeout(() => {
+      this.image = "http://localhost:3000/" + this.offreData.Personel.avatar;
+    }, 1000);
+    
+
+   }
  
   ngOnInit(): void {
    
-    this.offreData = this.userServ.getBlogOffre();
-    this.image = "http://localhost:3000/" + this.offreData.Personel.avatar;
-  }
+    }
 
 }

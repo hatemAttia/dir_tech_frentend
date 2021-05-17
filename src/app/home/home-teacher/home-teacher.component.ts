@@ -24,7 +24,7 @@ export class HomeTeacherComponent implements OnInit {
 
     this.userServ.getAllTeachers().subscribe(resp => {
       this.listTeachers = resp;
-      this.ListallTeacher=resp;
+      this.ListallTeacher = resp;
       console.log(resp)
     });
   }
@@ -39,6 +39,7 @@ export class HomeTeacherComponent implements OnInit {
           this.p=1;
       })
     } else {
+      this.listTeachers = this.ListallTeacher;
       //search with both
     }
   }

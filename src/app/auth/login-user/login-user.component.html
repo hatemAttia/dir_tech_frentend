@@ -15,26 +15,26 @@
         <div class="col-md-6">
             <div class="card">
                 <header class="card-header ">
-                    <a class="float-right btn btn-outline-danger mt-1" (click)="navigateTo('signup')">Sign up</a>
-                    <h4 class="card-title mt-2 text-danger">Log in</h4>
+                    <a class="float-right btn btn-outline-danger mt-1" (click)="navigateTo('signup')">S'inscrire</a>
+                    <h4 class="card-title mt-2 text-danger">Connexion</h4>
                 </header>
                 <article class="card-body">
                     <form [formGroup]="loginForm">
 
                         <div class="form-group">
-                            <label>Email address</label>
+                            <label>Adresse e-mail</label>
                             <input type="email" class="form-control" formControlName="email">
                         </div>
 
                         <div class="form-group">
-                            <label>Create password</label>
+                            <label>mot de passe</label>
                             <input class="form-control" formControlName="password" type="password">
                         </div>
-                        <label class="container" (change)="onItemChange($event.target.value)" checked="checked">Teacher
+                        <label class="container" (change)="onItemChange($event.target.value)" checked="checked">Enseignant    
                             <input type="radio" name="radio" value="Teacher">
                             <span class="checkmark"></span>
                         </label>
-                        <label class="container" (change)="onItemChange($event.target.value)">Stuff
+                        <label class="container" (change)="onItemChange($event.target.value)">Personnel
                             <input type="radio" name="radio"  value="Stuff">
                             <span class="checkmark"></span>
                         </label>

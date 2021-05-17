@@ -72,3 +72,8 @@ legend {
         font-weight: bold;
     }
 }
+
+.error {
+    font-size: 10px;
+    color: red;
+}

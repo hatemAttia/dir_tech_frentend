@@ -28,7 +28,7 @@ export class LoginUserComponent implements OnInit {
 
 
   ngOnInit() { 
-  }
+    }
 
   /**
  * Navigation
@@ -40,7 +40,6 @@ export class LoginUserComponent implements OnInit {
 
   onItemChange(value) {
     this.userType = value;
-    console.log(" Value is : ", value);
   }
 
   /**
@@ -51,10 +50,9 @@ export class LoginUserComponent implements OnInit {
       if (this.userType == "Stuff") {
         this.userServ.stuffLogin(this.loginForm.value).subscribe(res => {
           this.valid = false;
-          console.log(res)
           this.authServ.login("ROLE_STUFF");
-          this.userServ.setAdminData(res);
-          this.navigateTo("home/offers");
+          this.userServ.setUserData(res);
+          this.navigateTo("home/teacher");
         },
           error => {
             console.log(error);
@@ -66,7 +64,7 @@ export class LoginUserComponent implements OnInit {
           this.valid = false;
           console.log(res)
           this.authServ.login("ROLE_TEACHER");
-          this.userServ.setAdminData(res);
+          this.userServ.setUserData(res);
           this.navigateTo("home/offers");
         },
           error => {

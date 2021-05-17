@@ -30,7 +30,8 @@
                             "src/assets/css/light-bootstrap-dashboard.css",
                             "src/assets/css/demo.css",
                             "src/styles.css",
-                            "src/assets/css/stylehome.css"
+                            "src/assets/css/stylehome.css",
+                            "src/assets/css/ng-multiselect-dropdown.theme.scss"
 
                         ],
                         "scripts": [

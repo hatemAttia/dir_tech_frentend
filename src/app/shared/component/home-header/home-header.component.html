@@ -9,23 +9,26 @@
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li class="active"><a [routerLink]="['/home/offers']" routerLinkActive="router-link-active">Home</a></li>
-                <li><a (click)="scrollToElement('offer')">offer</a></li>
-                <li><a [routerLink]="['/home/favorite']">favorite</a></li>
+                <!-- <li><a (click)="scrollToElement('offer')">offer</a></li> -->
+                <li *ngIf="roleUser==='ROLE_STUFF'"><a [routerLink]="['/home/favorite']">favorite</a></li>
 
-                <li><a [routerLink]="['/home/teacher']">Contact</a></li>
-                <li><a [routerLink]="['/home/teacher']">Teacher</a></li>
+                <li *ngIf="roleUser==='ROLE_STUFF'"><a [routerLink]="['/home/add-offer']">offre</a></li>
+                <li *ngIf="roleUser==='ROLE_STUFF'"><a [routerLink]="['/home/teacher']">enseignant</a></li>
                 <li>
                     <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <span class="notification">Account</span>
+                        <span class="notification">Compte</span>
                     </a>
                     <ul class="dropdown-menu">
                         <button class="dropdown-item" [routerLink]="['/home/profil']">Profil</button>
-                        <button class="dropdown-item" (click)="logout()">Logout</button>
-                        <button class="dropdown-item" href="#">Another notification</button>
+                        <button class="dropdown-item" (click)="logout()">Se déconnecter</button>
+                        <!-- <button class="dropdown-item" href="#">Another notification</button> -->
                     </ul>
                 </li>
             </ul>
         </nav>
+
+
+
         <!-- .nav-menu -->
     </div>
 </header>

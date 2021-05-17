@@ -11,93 +11,132 @@
         <div class="col-md-6">
             <div class="card">
                 <header class="card-header ">
-                    <a class="float-right btn btn-outline-danger mt-1" (click)="navigateTo('login')">Log in</a>
-                    <h4 class="card-title mt-2 text-danger">Sign up</h4>
+                    <a class="float-right btn btn-outline-danger mt-1" (click)="navigateTo('login')">Connexion</a>
+                    <h4 class="card-title mt-2 text-danger">S'inscrire</h4>
                 </header>
                 <article class="card-body">
                     <form [formGroup]="signupForm">
-                        <div class="form-row">
-                            <div class="col form-group">
-                                <label>First name </label>
-                                <input type="text" class="form-control" formControlName="firstname">
+                        <!--//////////////////////////////////// First block //////////////////////////////////// -->
+                        <div *ngIf="formBlock==1">
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label>prénom </label>
+                                    <input type="text" class="form-control" formControlName="firstname">
+                                    <label position="stacked" class="error" *ngIf="signupForm.get('firstname').errors && signupForm.get('firstname').dirty">
+                                        prénom obligatoire
+                                    </label>
+                                </div>
+                                <!-- form-group end.// -->
+                                <div class="col form-group">
+                                    <label>nom</label>
+                                    <input type="text" class="form-control" formControlName="lastname">
+                                    <label position="stacked" class="error" *ngIf="signupForm.get('lastname').errors && signupForm.get('lastname').dirty">
+                                        nom obligatoire
+                                    </label>
+                                </div>
+                                <!-- form-group end.// -->
                             </div>
-                            <!-- form-group end.// -->
-                            <div class="col form-group">
-                                <label>Last name</label>
-                                <input type="text" class="form-control" formControlName="lastname">
+                            <!-- form-row end.// -->
+                            <div class="form-group">
+                                <label>Adresse e-mail</label>
+                                <input type="email" class="form-control" formControlName="email">
+                                <label position="stacked" class="error" *ngIf="signupForm.get('email').errors && signupForm.get('email').dirty">
+                                    email obligatoire
+                                </label>
                             </div>
-                            <!-- form-group end.// -->
-                        </div>
-                        <!-- form-row end.// -->
-                        <div class="form-group">
-                            <label>Email address</label>
-                            <input type="email" class="form-control" formControlName="email">
-                            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                            <label>phone Number </label>
-                            <input type="number" class="form-control" formControlName="phonenumber">
-                        </div>
-                        <div class="form-row">
-                            <div class="col form-group">
-                                <label>CIN </label>
-                                <input type="number" class="form-control" formControlName="cin">
+                            <div class="form-group">
+                                <label>numéro de téléphone </label>
+                                <input type="number" class="form-control" formControlName="phonenumber">
+                                <label position="stacked" class="error" *ngIf="signupForm.get('phonenumber').errors && signupForm.get('phonenumber').dirty">
+                                    numéro de téléphone obligatoire
+                                </label>
                             </div>
-                            <div class="col form-group">
-                                <label>Matricule</label>
-                                <input type="text" class="form-control" formControlName="matricule">
+                            <div class="form-group">
+                                <label>mot de passe</label>
+                                <input class="form-control" formControlName="password" type="password">
+                                <label position="stacked" class="error" *ngIf="signupForm.get('password').errors && signupForm.get('password').dirty">
+                                    mot de passe obligatoire
+                                </label>
                             </div>
+
+                            <div class="form-group">
+                                <label>Confirmer mot de passe</label>
+                                <input class="form-control" formControlName="confirmPassword" type="password">
+                                <label position="stacked" class="error" *ngIf="signupForm.hasError('notSame') && signupForm.get('confirmPassword').dirty || signupForm.get('confirmPassword').errors && signupForm.get('confirmPassword').dirty">       c'est pas la meme
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-danger float-right" (click)="suiv()"> Suivant  </button>
+                            </div>
+
                         </div>
-                        <!-- change User Type -->
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <label>Type</label>
-                                <select id="inputState" class="form-control" (change)="onItemSelectType($event.target.value)" formControlName="level">
+                        <!--//////////////////////////////////// First block //////////////////////////////////// -->
+                        <div *ngIf="formBlock==2">
+                            <div class="form-row">
+                                <div class="col form-group">
+                                    <label>CIN </label>
+                                    <input type="number" class="form-control" formControlName="cin">
+                                    <label position="stacked" class="error" *ngIf="signupForm.get('cin').errors && signupForm.get('cin').dirty">
+                                        cin obligatoire
+                                    </label>
+                                </div>
+                                <div class="col form-group">
+                                    <label>Matricule</label>
+                                    <input type="text" class="form-control" formControlName="matricule">
+                                    <label position="stacked" class="error" *ngIf="signupForm.get('matricule').errors && signupForm.get('matricule').dirty">
+                                        matricule obligatoire
+                                    </label>
+                                </div>
+                            </div>
+                            <!-- change User Type -->
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label>Type</label>
+                                    <select id="inputState" class="form-control" (change)="onItemSelectType($event.target.value)" formControlName="level">
                                     <option *ngFor="let type of types" > {{type}}</option>
                                 </select>
+                                </div>
                             </div>
-                        </div>
-                        <!-- Form stuff -->
-                        <div class="form-row">
-                            <div class="form-group col" *ngIf="userType=='Stuff'">
-                                <label>Poste</label>
-                                <select id="inputState" class="form-control" formControlName="poste">
+                            <!-- Form stuff -->
+                            <div class="form-row">
+                                <div class="form-group col" *ngIf="userType=='Stuff'">
+                                    <label>Poste</label>
+                                    <select id="inputState" class="form-control" formControlName="poste">
                                   <option *ngFor="let option of options" > {{option}}</option>
                                 </select>
+                                </div>
                             </div>
-                        </div>
-                        <!-- end Form stuff -->
-                        <!-- Form teacher -->
-                        <div class="form-row" *ngIf="userType=='Teacher'">
-                            <div class="form-group col-md-6">
-                                <label>Level</label>
-                                <select id="inputState" class="form-control" formControlName="level">
+                            <!-- end Form stuff -->
+                            <!-- Form teacher -->
+                            <div class="form-row" *ngIf="userType=='Teacher'">
+                                <div class="form-group col-md-6">
+                                    <label>niveau</label>
+                                    <select id="inputState" class="form-control" formControlName="level">
                                   <option *ngFor="let option of options" > {{option}}</option>   
                                 </select>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label>Compétence</label>
+                                    <ng-multiselect-dropdown formControlName="skill" [placeholder]="'Competence'" [settings]="dropdownSettings" [data]="dropdownList" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                    </ng-multiselect-dropdown>
+                                </div>
                             </div>
-                            <div class="form-group col-md-6">
-                                <label>Competence</label>
-                                <ng-multiselect-dropdown formControlName="skill" [placeholder]="'Competence'" [settings]="dropdownSettings" [data]="dropdownList" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
-                                </ng-multiselect-dropdown>
+                            <div class="form-group" *ngIf="userType=='Teacher'">
+                                <label>Description</label>
+                                <textarea class="form-control" formControlName="description" type="text"></textarea>
                             </div>
-                        </div>
-                        <div class="form-group" *ngIf="userType=='Teacher'">
-                            <label>Discription</label>
-                            <textarea class="form-control" formControlName="description" type="text"></textarea>
-                        </div>
-                        <!-- end form teacher -->
-                        <div class="form-group">
-                            <label>Create password</label>
-                            <input class="form-control" formControlName="password" type="password">
-                        </div>
-                        <div *ngIf=valid>
-                            <label style="color:red;">tous les champs obligatoire</label>
-                        </div>
-                        <div class="form-group">
-                            <button type="submit" class="btn btn-danger btn-block" (click)="signup()"> Register  </button>
+                            <!-- end form teacher -->
+
+                            <div *ngIf=valid>
+                                <label style="color:red;">tous les champs obligatoire</label>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-danger float-left" (click)="prev()"> prev  </button>
+                                <button type="submit" class="btn btn-danger float-right" (click)="signup()"> Register  </button>
+
+                            </div>
                         </div>
                         <!-- form-group// -->
-                        <small class="text-muted">By clicking the 'Sign Up' button, you confirm that you accept our <br> Terms of use and Privacy Policy.</small>
                     </form>
                 </article>
                 <!-- card-body end .// -->

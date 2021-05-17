@@ -9,10 +9,17 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-header.component.css']
 })
 export class HomeHeaderComponent implements OnInit {
+  roleUser;
 
-  constructor( private router:Router ,private vps: ViewportScroller,private authServ:AuthService) { }
+  constructor( private router:Router ,private vps: ViewportScroller,private authServ:AuthService) { 
+    this.roleUser= this.authServ.getRole();
+    if(this.roleUser==="ROLE_STUFF"){
+      console.log("++"+this.roleUser);
 
+    }
+  }
   ngOnInit(): void {
+  
   }
 
   logout(){
