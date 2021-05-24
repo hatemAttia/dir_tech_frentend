@@ -19,7 +19,7 @@
                                 <th>email</th>
                                 <th>PhoneNumber</th>
                                 <th>Matricule</th>
-                                <th>opp</th>
+                                <th>Delete</th>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let stuff of listStuff | serchTeacher: searchName">
@@ -29,9 +29,7 @@
                                     <td>{{stuff.phonenumber}}</td>
                                     <td>{{stuff.matricule}}</td>
                                     <td>
-                                        <button type="button" class="btn btn-info">INFO</button>&nbsp;
-                                        <button type="button" class="btn btn-warning">UPDATE</button>&nbsp;
-                                        <button type="button" class="btn btn-danger">DELETE</button>
+                                        <button type="button" class="btn btn-danger" (click)="deleteStuff(stuff.id)">DELETE</button>
                                     </td>
                                 </tr>
                             </tbody>

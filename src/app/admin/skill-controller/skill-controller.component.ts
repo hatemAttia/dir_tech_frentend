@@ -23,7 +23,10 @@ export class SkillControllerComponent implements OnInit {
   ngOnInit() {
     this.display();
   }
-
+  
+  /**
+   * 
+   */
   display() {
     this.userServ.getAllSkills().subscribe((resp: any) => {
       console.log(resp);
@@ -33,6 +36,9 @@ export class SkillControllerComponent implements OnInit {
     });
   }
 
+  /**
+   * 
+   */
   toggleSearch() {
     this.tSearch = !this.tSearch;
   }
@@ -54,7 +60,7 @@ export class SkillControllerComponent implements OnInit {
     }
   }
 
- 
+
   /**
    * 
    */
@@ -63,7 +69,6 @@ export class SkillControllerComponent implements OnInit {
       this.adminServ.updateSkill({
         "name": this.skillName
       }, this.idSkill).subscribe(res => {
-
         this.display();
         this.notifBody = "Skill " + this.skillName + " updated"
         this.skillName = '';
@@ -76,8 +81,8 @@ export class SkillControllerComponent implements OnInit {
   /**
    * 
    */
-  DeleteSkill(element){
-    this.adminServ.DeleteSkill(element.id).subscribe((resp:any) => {
+  DeleteSkill(element) {
+    this.adminServ.DeleteSkill(element.id).subscribe((resp: any) => {
 
       this.display();
       this.notifBody = resp.res
@@ -102,10 +107,10 @@ export class SkillControllerComponent implements OnInit {
     }
   }
 
-  closeUpdateBlock(){
+  closeUpdateBlock() {
     this.skillName = '';
     this.idSkill = "";
-    this.addToggle=false;
+    this.addToggle = false;
   }
 
 }

@@ -46,7 +46,7 @@ export class HomeTeacherComponent implements OnInit {
 
   addFavorite(data){
    this.notifBody = this.userServ.addFavorite(data)
-   console.log(this.notifBody);
+   console.log(data);
    this.showNotif();
   }
 

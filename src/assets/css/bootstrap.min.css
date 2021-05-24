@@ -4902,12 +4902,14 @@ button.close {
 }
 
 .modal-dialog {
+    margin-left: 25% !important;
     position: relative;
     width: auto;
     margin: 10px
 }
 
 .modal-content {
+    width: 50vw !important;
     position: relative;
     display: -ms-flexbox;
     display: flex;

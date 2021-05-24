@@ -19,6 +19,7 @@
                                 <th>email</th>
                                 <th>PhoneNumber</th>
                                 <th>Matricule</th>
+                                <th>delete</th>
                             </thead>
                             <tbody>
                                 <tr *ngFor="let teacher of listTeacher | serchTeacher: searchName">
@@ -27,6 +28,9 @@
                                     <td>{{teacher.email}}</td>
                                     <td>{{teacher.phonenumber}}</td>
                                     <td>{{teacher.matricule}}</td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger" (click)="deleteTeacher(teacher.id)">DELETE</button>
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>

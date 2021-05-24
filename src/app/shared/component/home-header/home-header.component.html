@@ -14,20 +14,27 @@
 
                 <li *ngIf="roleUser==='ROLE_STUFF'"><a [routerLink]="['/home/add-offer']">offre</a></li>
                 <li *ngIf="roleUser==='ROLE_STUFF'"><a [routerLink]="['/home/teacher']">enseignant</a></li>
-                <li>
-                    <a href="#" class="dropdown-toggle nav-link" data-toggle="dropdown">
-                        <span class="notification">Compte</span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <button class="dropdown-item" [routerLink]="['/home/profil']">Profil</button>
-                        <button class="dropdown-item" (click)="logout()">Se déconnecter</button>
-                        <!-- <button class="dropdown-item" href="#">Another notification</button> -->
-                    </ul>
+                <li ngbDropdown style="cursor: pointer;">
+                    <a class="dropdown-toggle nav-link" id="dropdownBasic1" ngbDropdownToggle>
+                        <span class="notification">Compte</span></a>
+                    <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                        <button ngbDropdownItem [routerLink]="['/home/profil']">Profil</button>
+                        <button ngbDropdownItem (click)="logout()">Se déconnecter</button>
+                    </div>
                 </li>
             </ul>
         </nav>
+        <div ngbDropdown>
+            <button type="button" ngbDropdownToggle *ngIf="isMobileLayout"><img src="assets/img/menu.png" height="50px"></button>
+            <div ngbDropdownMenu aria-labelledby="dropdownBasic1">
+                <button ngbDropdownItem *ngIf="roleUser==='ROLE_STUFF'" [routerLink]="['/home/favorite']">favorite</button>
+                <button ngbDropdownItem *ngIf="roleUser==='ROLE_STUFF'" [routerLink]="['/home/add-offer']">offre</button>
+                <button ngbDropdownItem *ngIf="roleUser==='ROLE_STUFF'" [routerLink]="['/home/teacher']">enseignant</button>
+                <button ngbDropdownItem [routerLink]="['/home/profil']">Profil</button>
+                <button ngbDropdownItem (click)="logout()">Se déconnecter</button>
 
-
+            </div>
+        </div>
 
         <!-- .nav-menu -->
     </div>

@@ -1,3 +1,31 @@
+<!-- ///////////////////// password form ///////////////////// -->
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">modifier mot de passe</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="dateOfBirth">mot de pass Actuelle</label>
+                <input class="form-control" [(ngModel)]="currentPassword" type="password">
+                <label for="dateOfBirth">Nouveau mot de passe</label>
+                <input class="form-control" [(ngModel)]="newPassword" type="password">
+                <label for="dateOfBirth">confirme mot de passe</label>
+                <input class="form-control" [(ngModel)]="confPassword" type="password">
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit " class="btn btn-info btn-danger pull-right">Registrer</button>
+
+    </div>
+</ng-template>
+<!-- ///////////////////// profil form ///////////////////// -->
+
 <div class="content" style="padding-top: 150px;">
     <div class="container-fluid">
         <div class="section-title">
@@ -92,14 +120,17 @@
                             <!-- ========= end  stuff form ========== -->
                             <div *ngIf="userUploaded" class=" notif-container col-11 col-sm-12 alert alert-success alert-with-icon" role="alert">
                                 <span data-notify="icon" class="nc-icon nc-app"></span>
-                                <span data-notify="title"> User Updated</span>
+                                <span data-notify="title">l'utilisateur a modifié</span>
                             </div>
+                            <div class=" d-flex justify-content-end">
+                                <button type="submit " class="btn btn-danger btn-fill pull-right mr-auto p-2" [disabled]=" !profilForm.valid || !profilForm.touched" (click)="updateUser() ">modifier le profil </button>
 
-                            <button type="submit " class="btn btn-danger btn-fill pull-right" (click)="updateUser() ">Update Profile</button>
-                            <div class="clearfix "></div>
+                                <button type="submit " class="btn btn-danger  btn-fill pull-right" (click)="open(content) ">Modifier mot de pass </button>
+                            </div>
                         </form>
                     </div>
                 </div>
+                <!-- ///////////////////// image form ///////////////////// -->
 
             </div>
             <div class="col-md-4 ">
@@ -111,11 +142,9 @@
                         <div class="author ">
                             <a>
                                 <img class="avatar border-gray " [src]="image" alt="... ">
-                                <h5 class="title ">Mike Andrew</h5>
+                                <h5 class="title "> {{userData.lastname}} {{userData.firstname}}</h5>
                             </a>
-                            <p class="description ">
-                                {{userData.lastname}} {{userData.firstname}}
-                            </p>
+
                         </div>
                         <p class="description text-center">
                             {{userData.description}}
@@ -129,14 +158,16 @@
                     </div>
                     <div class="button-container mr-auto ml-auto ">
                         <input type="file" id="img" name="img " accept="image/* " (change)="onFileChanged($event) " class="form-control " />
-                        <button type="submit" class="btn btn-danger btn-fill pull-right" (click)="onUpload() ">Update image</button>
+                        <button type="submit" class="btn btn-danger btn-fill pull-right" [disabled]="_imgButtonEnabel" (click)="onUpload() ">modifier l'image</button>
                     </div>
                 </div>
             </div>
+            <!-- ///////////////////// skill form ///////////////////// -->
+
             <div class="col-md-8 d-flex justify-content-center" *ngIf="userConnected=='ROLE_TEACHER'">
                 <div class="card" style="width: 100%;">
                     <div class="card-header">
-                        <h4 class="card-title">Votre Comptance</h4>
+                        <h4 class="card-title">Votre Compétence</h4>
                     </div>
                     <div class="card-body">
                         <form [formGroup]="profilForm">
@@ -149,13 +180,13 @@
                                 <div class="col-md-6">
                                     <div class="form-group ">
                                         <div class="form-group col-md-11" style="padding-top: 2.5px;">
-                                            <ng-multiselect-dropdown formControlName="skill" [placeholder]="'Competance'" [settings]="dropdownSettings" [data]="dropdownList" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                            <ng-multiselect-dropdown formControlName="skill" [placeholder]="'Compétence'" [settings]="dropdownSettings" [data]="dropdownList" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                             </ng-multiselect-dropdown>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="form-group col-md-3">
-                                    <button type="submit" class="btn btn-danger btn-fill" (click)="addSkills() ">Ajouter Competance</button>
+                                    <button type="submit" class="btn btn-danger btn-fill" (click)="addSkills() ">Ajouter Compétence</button>
                                 </div>
                             </div>
                             <div class="row " *ngFor="let skill of userData.skills ">
@@ -177,7 +208,6 @@
                 </div>
             </div>
             <div class="col-md-4 d-flex justify-content-center "></div>
-
         </div>
 
 

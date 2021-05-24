@@ -17,6 +17,10 @@ export class StuffControllerComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.display();
+  }
+
+  display(){
     this.userServ.getAllStuff().subscribe((resp: any) => {
       console.log(resp);
       this.listStuff=resp;
@@ -24,9 +28,14 @@ export class StuffControllerComponent implements OnInit {
       console.log(error);
     });
   }
-
   toggleSearch(){
     this.tSearch=!this.tSearch;
   }
   
+  deleteStuff(id){
+    this.adminServ.deleteStuff(id).subscribe((res:any)=>{
+      console.log(res)
+    })
+    this.display();
+  }
 }

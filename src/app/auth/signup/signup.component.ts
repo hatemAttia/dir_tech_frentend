@@ -20,7 +20,7 @@ export class SignupComponent implements OnInit {
   valid;
   dropdownSettings: IDropdownSettings = {};
   options = [];
-  
+  optionsstuff;
   signupForm: FormGroup;
   constructor(
     public userServ: UserService,
@@ -60,6 +60,11 @@ export class SignupComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+
+    this.optionsstuff = [
+      "scolatité",
+      "equipe administrative"
+    ];
 
     this.options = [
       "choose ...",

@@ -1,15 +1,64 @@
-<app-modal-add-offre id="custom-modal-2">
-    <div style="padding-top: 10px;">
-        <button class="float-right btn btn-outline-danger exit-button mt-1" (click)="closeModal('custom-modal-2');">
-        <i class="nc-icon nc-simple-remove"></i>
-    </button>
+<ng-template #content let-modal>
+    <div class="jw-modal">
+        <div class="row col-md ">
+            <div class="col-md-12 d-flex justify-content-center">
+                <div class="card">
+                    <div class="card-header">
+                        <h4 *ngIf="_offreId ==0" class="card-title">Ajouter un Offre</h4>
+                        <h4 *ngIf="_offreId !=0" class="card-title">Modifier L'Offre</h4>
+                    </div>
+                    <div class="card-body">
+                        <!-- ========= end  offer form ========== -->
+                        <form [formGroup]="offerForm">
+                            <div class="row">
+                                <div class="col-md-5 pr-1">
+                                    <div class="form-group">
+                                        <label>Titre</label>
+                                        <input type="text" class="form-control" placeholder="Ttle" b formControlName="title">
+                                    </div>
+                                </div>
+                                <div class="col-md-3 px-1">
+                                    <div class="form-group">
+                                        <label>Poste</label>
+                                        <input type="text" formControlName="poste" class="form-control" placeholder="teacher...">
+                                    </div>
+                                </div>
+                                <div class="col-md-4 pl-1">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">date limite</label>
+                                        <input type="date" class="form-control" formControlName="deadline">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 pr-1">
+                                    <div class="form-group">
+                                        <label>Description</label>
+                                        <textarea type="text" class="form-control" placeholder="Description" formControlName="description"></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- ========= end  offer form ========== -->
+                            <div class="text-center alert alert-success opacity" role="alert" *ngIf="userUploaded">
+
+                            </div>
+                            <button type="submit " class="btn btn-info btn-danger pull-right" (click)="addOffer() ">Registrer</button>
+                            <div class="clearfix "></div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-</app-modal-add-offre>
+    <div class="jw-modal-background"></div>
+</ng-template>
 
 <div style="padding-top: 200px;">
-    <div class="section-title">
-        <h2>Offer</h2>
-        <button (click)="openModal('custom-modal-2');" type="button" class="btn btn-danger">Ajouter une Offre</button>
+    <div>
+        <h5 class="section-title h1">NOTRE OFFRE</h5>
+    </div>
+    <div class="section-title d-flex justify-content-center">
+        <button (click)="offreFormOpen(content,0)" type="button" class="btn btn-danger pull-right">Ajouter une Offre</button>
     </div>
     <!-- ============================================================== -->
     <section id="blog" class="blog">
@@ -41,8 +90,9 @@
                                     <p>
                                         {{offre.description}}
                                     </p>
-                                    <div class="read-more">
-                                        <a href="blog-single.html">Update Offre</a>
+                                    <div>
+                                        <button type="submit " style="margin-right:10px" class="btn btn-danger " (click)="UpdateFormOpen(content,offre)">Mettre à jour </button>
+                                        <button type="submit " class="btn btn-danger " style="margin-right:50px" (click)="deleteOffre(offre.id)">Supprimer </button>
                                     </div>
                                 </div>
 

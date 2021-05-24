@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-profil',
@@ -20,10 +21,11 @@ export class ProfilComponent implements OnInit {
   imageImageUploaded = false;
   dropdownList = [];
   userConnected;
+  _imgButtonEnabel = true;
+  _profilButtonEnabel = true;
   profilForm: FormGroup;
-  constructor(private userServ: UserService, private authServ: AuthService, private formBuilder: FormBuilder) {
+  constructor(private modalService: NgbModal, private userServ: UserService, private authServ: AuthService, private formBuilder: FormBuilder) {
     this.options = [
-      "choose ...",
       "Maitre chercheur",
       "Maitre Assistant",
       "Doctorant",
@@ -32,7 +34,7 @@ export class ProfilComponent implements OnInit {
     ];
     this.userConnected = this.authServ.getRole();
     this.userData = this.userServ.getUserData();
-    console.log(this.userData);
+    console.log(this.userData)
     this.image = "http://localhost:3000/" + this.userData.avatar;
     this.profilForm = this.formBuilder.group({
       firstname: [this.userData.firstname, Validators.required],
@@ -45,12 +47,23 @@ export class ProfilComponent implements OnInit {
       poste: [this.userData.poste],
       skill: [''],
     });
-    console.log(this.userData.skills)
   }
 
   ngOnInit() {
-    this.userServ.getAllSkills().subscribe((resp: any) => {
-      this.dropdownList = resp;
+    this.display();
+  }
+
+  display() {
+    this.userServ.getAllSkills().subscribe((res: any) => {
+      var dd = [];
+      res.forEach(skill => {
+        var found = this.userData.skills.filter(elment => skill.id == elment.id)
+        if (found.length<=0) {
+          dd.push(skill)
+        }
+
+      });
+      this.dropdownList = dd;
     });
     this.dropdownSettings = {
       singleSelection: false,
@@ -61,8 +74,8 @@ export class ProfilComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
-  }
 
+  }
   onFileChanged(event) {
     this.imageFile = event.target.files[0];
     var reader = new FileReader();
@@ -70,7 +83,7 @@ export class ProfilComponent implements OnInit {
 
     reader.onload = (_event) => {
       this.image = reader.result;
-      //  console.log(this.image);
+      this._imgButtonEnabel = false;
     }
   }
 
@@ -82,13 +95,12 @@ export class ProfilComponent implements OnInit {
       this.userServ.UpdateImageTeacher(this.imageFile, this.userData.id).subscribe(resp => {
         this.showNotif();
       })
-    }else if (this.userConnected == "ROLE_STUFF"){
+    } else if (this.userConnected == "ROLE_STUFF") {
       this.userServ.UpdateImageStuff(this.imageFile, this.userData.id).subscribe(resp => {
         this.showNotif();
       })
     }
   }
-
 
   /**
    * 
@@ -140,10 +152,12 @@ export class ProfilComponent implements OnInit {
       "skillId": skillId
     }).subscribe(res => {
       console.log(res)
-      this.userServ.getUserDataFromDB().subscribe((res: any) => {
+      this.userServ.getTeacherDataFromDB().subscribe((res: any) => {
         console.log(res)
         this.userData = res;
         this.userServ.setUserData(res);
+        this.display();
+
       });
     })
   }
@@ -157,12 +171,15 @@ export class ProfilComponent implements OnInit {
         "skill": this.profilForm.get('skill').value
       }).subscribe(res => {
         console.log(res)
-        this.userServ.getUserDataFromDB().subscribe((res: any) => {
+        this.userServ.getTeacherDataFromDB().subscribe((res: any) => {
           console.log(res)
           this.userData = res;
           this.userServ.setUserData(res);
         });
       })
     }
+  }
+  open(content) {
+    this.modalService.open(content, { size: 'lg' });
   }
 }

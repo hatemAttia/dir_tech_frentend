@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModalAddOffreService } from 'src/app/shared/modal-add-offre.service';
 import { UserService } from 'src/app/shared/services/user.service';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-add-offer',
@@ -11,26 +11,73 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class AddOfferComponent implements OnInit {
   offerForm: FormGroup;
   listOffres;
-  constructor(private userServ :UserService,private formBuilder: FormBuilder, private modalServ: ModalAddOffreService) {
+  closeResult = '';
+  _offreId =0;
+  constructor(
+    private modalService: NgbModal,
+    private userServ: UserService,
+    private formBuilder: FormBuilder,) {
     this.offerForm = this.formBuilder.group({
       title: ['', Validators.required],
       deadline: ['', Validators.required],
-      matricule: ['', Validators.required],
       poste: ['', Validators.required],
+      description: ['', Validators.required],
     });
   }
   ngOnInit(): void {
-    this.listOffres=this.userServ.getOffresUser();
-    console.log( this.listOffres[0].poste);
-   }
-
-
-  openModal(id: string) {
-    this.modalServ.open(id);
+   this.display();
   }
 
-  closeModal(id: string) {
-    this.modalServ.close(id);
+  display() {
+    this.userServ. getOffresUser().subscribe(res=>{
+      this.listOffres =res
+    });
+    
   }
 
+
+  offreFormOpen(content,id) {
+    this._offreId =id;
+        this.offerForm.setValue({
+      title: "",
+      deadline: "",
+      poste: "",
+      description: "",
+    });
+    this.modalService.open(content, { size: 'lg' });
+  }
+
+  UpdateFormOpen(content, offre) {
+    this._offreId =offre.id;
+    this.offerForm.setValue({
+      title: offre.title,
+      deadline: offre.deadline,
+      poste: offre.poste,
+      description: offre.description,
+    });
+    this.modalService.open(content, { size: 'lg' });
+  }
+
+  addOffer() {
+    if ( this._offreId == 0) {
+      console.log(this.userServ.getUserData());
+      this.userServ.addOffre(this.offerForm.value).subscribe((res: any) => {
+        this.display();
+        this.modalService.dismissAll()
+      })
+    }else { 
+      console.log("hiii");
+      this.userServ.updateOffre(this.offerForm.value,this._offreId).subscribe((res: any) => {
+        console.log(res);
+        this.display();
+      })
+    }
+  }
+
+  deleteOffre(id){
+    this.userServ.DeleteOffre(id).subscribe((res:any)=>{
+      console.log(res)
+      this.display();
+    })
+  }
 }

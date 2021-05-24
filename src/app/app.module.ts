@@ -36,6 +36,7 @@ import { SkillControllerComponent } from './admin/skill-controller/skill-control
 import { SearchSkillPipe } from './shared/pipes/search-skill.pipe';
 import { SingleOffreComponent } from './home/single-offre/single-offre.component';
 import { ListFavoriteComponent } from './home/list-favorite/list-favorite.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   
@@ -75,7 +76,8 @@ import { ListFavoriteComponent } from './home/list-favorite/list-favorite.compon
     ReactiveFormsModule,
     BrowserModule,
     HttpClientModule,
-    RouterModule.forRoot(routes) ],
+    RouterModule.forRoot(routes),
+    NgbModule ],
   providers: [  { provide: JWT_OPTIONS, useValue: JWT_OPTIONS },
     JwtHelperService],
   bootstrap: [AppComponent]

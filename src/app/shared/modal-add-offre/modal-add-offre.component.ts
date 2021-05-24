@@ -1,5 +1,6 @@
 import { Component, ElementRef, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AddOfferComponent } from 'src/app/home/add-offer/add-offer.component';
 import { ModalAddOffreService } from '../modal-add-offre.service';
 import { UserService } from '../services/user.service';
 
@@ -13,7 +14,7 @@ export class ModalAddOffreComponent implements OnInit {
   private element: any;
   offerForm: FormGroup;
 
-  constructor(private userServ:UserService,private formBuilder: FormBuilder,private el: ElementRef, private modalServ: ModalAddOffreService) {
+  constructor(private offreCom:AddOfferComponent,private userServ:UserService,private formBuilder: FormBuilder,private el: ElementRef, private modalServ: ModalAddOffreService) {
     this.element = el.nativeElement;
     this.offerForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -59,8 +60,11 @@ export class ModalAddOffreComponent implements OnInit {
   }
 
   addOffer(){
-    this.userServ.addOffre(this.offerForm.value).subscribe(resp=>{
-      console.log(resp)
+    this.userServ.addOffre(this.offerForm.value).subscribe(res=>{
+      console.log("dddddddddddddd")
+      console.log(res)
+    
+      this.offreCom.display();
     })
 
   }

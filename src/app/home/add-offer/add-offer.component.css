@@ -4,3 +4,14 @@
     color: red;
     border-color: red;
 }
+
+section {
+    padding: 60px 0;
+}
+
+.section-title {
+    text-align: center;
+    color: #d10a14;
+    margin-top: 0;
+    text-transform: uppercase;
+}

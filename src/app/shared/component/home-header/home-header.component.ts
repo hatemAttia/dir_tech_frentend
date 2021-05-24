@@ -9,8 +9,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./home-header.component.css']
 })
 export class HomeHeaderComponent implements OnInit {
-  roleUser;
-
+  roleUser:any;
+  mobile=false;
+  isMobileLayout:boolean;
   constructor( private router:Router ,private vps: ViewportScroller,private authServ:AuthService) { 
     this.roleUser= this.authServ.getRole();
     if(this.roleUser==="ROLE_STUFF"){
@@ -19,6 +20,12 @@ export class HomeHeaderComponent implements OnInit {
     }
   }
   ngOnInit(): void {
+    if (document.body.offsetWidth <= 1000) { 
+      this.isMobileLayout = true;
+    }
+    window.onresize = () => this.isMobileLayout = window.innerWidth <= 1000;
+    console.log(document.body.offsetWidth);
+   
   
   }
 
@@ -32,7 +39,7 @@ export class HomeHeaderComponent implements OnInit {
     this.vps.scrollToAnchor(id);
   }
 
-    /**
+  /**
  * Navigation
  * @param path: string; ;
  */

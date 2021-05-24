@@ -1,0 +1,7 @@
+<virtualHost *:80>
+	ServerName epi.com
+DocumentRoot /home/hatem/Project/Angular/tp_angular/angular_tp/dist/tp1/
+<Directory /home/hatem/Project/Angular/tp_angular/angular_tp/dist/tp1/ >
+	#this relaxes Apache security settings .
+	RewriteEngine On
+	/home/hatem/Project/Angular/tp_angular/angular_tp/dist/tp1

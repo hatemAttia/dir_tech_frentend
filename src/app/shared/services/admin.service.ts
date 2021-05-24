@@ -67,6 +67,16 @@ export class AdminService {
         catchError(this.traitementErreur))
   }
   
+  deleteTeacher(id){
+    return this.http.delete(this.path + "/teacher/delete/"+ parseInt(id)).pipe(retry(2),
+      catchError(this.traitementErreur));
+  }
+
+  deleteStuff(id){
+    return this.http.delete(this.path + "/stuff/delete/"+ parseInt(id)).pipe(retry(2),
+      catchError(this.traitementErreur));
+  }
+
   /**
    * Update Image
    * @param element 

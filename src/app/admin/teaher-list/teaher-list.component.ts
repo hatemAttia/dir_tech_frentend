@@ -16,6 +16,11 @@ export class TeaherListComponent implements OnInit {
 
 
   ngOnInit() {
+    this.display();
+
+  }
+
+  display(){
     this.adminServ.getAllTeacher().subscribe((resp: any) => {
       console.log(resp);
       this.listTeacher=resp;
@@ -23,9 +28,14 @@ export class TeaherListComponent implements OnInit {
       console.log(error);
     });
   }
-
   toggleSearch(){
     this.tSearch=!this.tSearch;
   }
-  
+ 
+  deleteTeacher(id){
+    this.adminServ.deleteTeacher(id).subscribe((res:any)=>{
+      console.log(res)
+    })
+    this.display();
+  }
 }

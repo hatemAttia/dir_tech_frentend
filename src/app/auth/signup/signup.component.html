@@ -4,8 +4,6 @@
 <script src="bower_components/angular-bootstrap-multiselect/dist/angular-bootstrap-multiselect.min.js"></script>
 <!------ Include the above in your HEAD tag ---------->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
-
-
 <div style="padding: 100px 0px;width: 100%; background:url(assets/img/epi.png); height: 175%; background-attachment: fixed;">
     <div class="row justify-content-center" style="margin: 0 !important">
         <div class="col-md-6">
@@ -62,7 +60,8 @@
                             <div class="form-group">
                                 <label>Confirmer mot de passe</label>
                                 <input class="form-control" formControlName="confirmPassword" type="password">
-                                <label position="stacked" class="error" *ngIf="signupForm.hasError('notSame') && signupForm.get('confirmPassword').dirty || signupForm.get('confirmPassword').errors && signupForm.get('confirmPassword').dirty">       c'est pas la meme
+                                <label position="stacked" class="error" *ngIf="signupForm.hasError('notSame') && signupForm.get('confirmPassword').dirty || signupForm.get('confirmPassword').errors && signupForm.get('confirmPassword').dirty"> 
+                                          c'est pas la meme
                                 </label>
                             </div>
                             <div class="form-group">
@@ -70,7 +69,8 @@
                             </div>
 
                         </div>
-                        <!--//////////////////////////////////// First block //////////////////////////////////// -->
+                        <!--//////////////////////////////////// second block //////////////////////////////////// -->
+
                         <div *ngIf="formBlock==2">
                             <div class="form-row">
                                 <div class="col form-group">
@@ -102,7 +102,7 @@
                                 <div class="form-group col" *ngIf="userType=='Stuff'">
                                     <label>Poste</label>
                                     <select id="inputState" class="form-control" formControlName="poste">
-                                  <option *ngFor="let option of options" > {{option}}</option>
+                                  <option *ngFor="let option of optionsstuff" > {{option}}</option>
                                 </select>
                                 </div>
                             </div>
@@ -117,7 +117,7 @@
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label>Compétence</label>
-                                    <ng-multiselect-dropdown formControlName="skill" [placeholder]="'Competence'" [settings]="dropdownSettings" [data]="dropdownList" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                    <ng-multiselect-dropdown formControlName="skill" [placeholder]="'Compétence'" [settings]="dropdownSettings" [data]="dropdownList" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
                                     </ng-multiselect-dropdown>
                                 </div>
                             </div>
