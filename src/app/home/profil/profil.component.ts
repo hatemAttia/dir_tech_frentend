@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/shared/services/auth.service';
 import { UserService } from 'src/app/shared/services/user.service';
 import { IDropdownSettings } from 'ng-multiselect-dropdown';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-profil',
@@ -56,6 +56,7 @@ export class ProfilComponent implements OnInit {
   display() {
     this.userServ.getAllSkills().subscribe((res: any) => {
       var dd = [];
+      if(this.userData.skills)
       res.forEach(skill => {
         var found = this.userData.skills.filter(elment => skill.id == elment.id)
         if (found.length<=0) {

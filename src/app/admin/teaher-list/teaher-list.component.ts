@@ -11,6 +11,7 @@ export class TeaherListComponent implements OnInit {
   listTeacher;
   searchName='';
   tSearch=false;
+  page=1;
   constructor( public adminServ: AdminService,
     private router: Router) { }
 

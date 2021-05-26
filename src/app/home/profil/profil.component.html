@@ -24,35 +24,65 @@
 
     </div>
 </ng-template>
-<!-- ///////////////////// profil form ///////////////////// -->
 
-<div class="content" style="padding-top: 150px;">
+<!-- ///////////////////// image form ///////////////////// -->
+<div class="content" style="padding-top: 100px;">
     <div class="container-fluid">
         <div class="section-title">
             <h3>Profil </h3>
         </div>
         <div class="row col-md ">
-            <div class="col-md-8 d-flex justify-content-center">
-                <div class="card">
+            <div class="col-md-4 ">
+                <div class="card card-user ">
+                    <div class="card-image ">
+                        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400 " alt="... ">
+                    </div>
+                    <div class="card-body ">
+                        <div class="author ">
+                            <a>
+                                <img class="avatar border-gray " [src]="image" alt="... ">
+                                <h5 class="title "> {{userData.lastname}} {{userData.firstname}}</h5>
+                            </a>
+
+                        </div>
+                        <p class="description text-center">
+                            {{userData.description}}
+                        </p>
+                    </div>
+                    <hr>
+                    <div *ngIf="imageImageUploaded" class=" notif-container col-11 col-sm-12 alert alert-success alert-with-icon" role="alert">
+                        <button type="button" aria-hidden="true" class="close" (click)="closeNotif()"><i class="nc-icon nc-simple-remove"></i></button>
+                        <span data-notify="icon" class="nc-icon nc-app"></span>
+                        <span data-notify="title"> Image Uploaded</span>
+                    </div>
+                    <div class="button-container mr-auto ml-auto ">
+                        <input type="file" id="img" name="img " accept="image/* " (change)="onFileChanged($event) " class="form-control " />
+                        <button type="submit" class="btn btn-danger btn-fill pull-right" [disabled]="_imgButtonEnabel" (click)="onUpload() ">modifier l'image</button>
+                    </div>
+                </div>
+            </div>
+            <!-- ///////////////////// profil form ///////////////////// -->
+            <div class="col-md-8 d-flex flex-column">
+                <div class="card" style="width: 90%; ">
                     <div class="card-header">
                         <h4 class="card-title">Edit Profile</h4>
                     </div>
                     <div class="card-body">
                         <form [formGroup]="profilForm">
                             <div class="row">
-                                <div class="col-md-5 pr-1">
+                                <div class="col-md-3 pr-1">
                                     <div class="form-group">
                                         <label>Email address</label>
                                         <input type="text" class="form-control" disabled="" placeholder="email" value=" {{userData.email}}">
                                     </div>
                                 </div>
-                                <div class="col-md-3 px-1">
+                                <div class="col-md-6 px-1">
                                     <div class="form-group">
                                         <label>Cin</label>
                                         <input type="text" formControlName="cin" class="form-control" placeholder="Cin">
                                     </div>
                                 </div>
-                                <div class="col-md-4 pl-1">
+                                <div class="col-md-3 pl-1">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">Phone Number</label>
                                         <input type="number" class="form-control" formControlName="phonenumber" placeholder="phonenumber">
@@ -123,70 +153,36 @@
                                 <span data-notify="title">l'utilisateur a modifié</span>
                             </div>
                             <div class=" d-flex justify-content-end">
-                                <button type="submit " class="btn btn-danger btn-fill pull-right mr-auto p-2" [disabled]=" !profilForm.valid || !profilForm.touched" (click)="updateUser() ">modifier le profil </button>
+                                <button type="submit " class="btn btn-danger btn-fill pull-right mr-auto p-2" [disabled]="profilForm.invalid || !profilForm.touched" (click)="updateUser() ">modifier le profil </button>
 
                                 <button type="submit " class="btn btn-danger  btn-fill pull-right" (click)="open(content) ">Modifier mot de pass </button>
                             </div>
                         </form>
                     </div>
                 </div>
-                <!-- ///////////////////// image form ///////////////////// -->
-
-            </div>
-            <div class="col-md-4 ">
-                <div class="card card-user ">
-                    <div class="card-image ">
-                        <img src="https://ununsplash.imgix.net/photo-1431578500526-4d9613015464?fit=crop&fm=jpg&h=300&q=75&w=400 " alt="... ">
+                <!-- ///////////////////// skill form ///////////////////// -->
+                <div class="card " style="width: 90%; ">
+                    <div class="card-header ">
+                        <h4 class="card-title ">Votre Compétence</h4>
                     </div>
                     <div class="card-body ">
-                        <div class="author ">
-                            <a>
-                                <img class="avatar border-gray " [src]="image" alt="... ">
-                                <h5 class="title "> {{userData.lastname}} {{userData.firstname}}</h5>
-                            </a>
-
-                        </div>
-                        <p class="description text-center">
-                            {{userData.description}}
-                        </p>
-                    </div>
-                    <hr>
-                    <div *ngIf="imageImageUploaded" class=" notif-container col-11 col-sm-12 alert alert-success alert-with-icon" role="alert">
-                        <button type="button" aria-hidden="true" class="close" (click)="closeNotif()"><i class="nc-icon nc-simple-remove"></i></button>
-                        <span data-notify="icon" class="nc-icon nc-app"></span>
-                        <span data-notify="title"> Image Uploaded</span>
-                    </div>
-                    <div class="button-container mr-auto ml-auto ">
-                        <input type="file" id="img" name="img " accept="image/* " (change)="onFileChanged($event) " class="form-control " />
-                        <button type="submit" class="btn btn-danger btn-fill pull-right" [disabled]="_imgButtonEnabel" (click)="onUpload() ">modifier l'image</button>
-                    </div>
-                </div>
-            </div>
-            <!-- ///////////////////// skill form ///////////////////// -->
-
-            <div class="col-md-8 d-flex justify-content-center" *ngIf="userConnected=='ROLE_TEACHER'">
-                <div class="card" style="width: 100%;">
-                    <div class="card-header">
-                        <h4 class="card-title">Votre Compétence</h4>
-                    </div>
-                    <div class="card-body">
-                        <form [formGroup]="profilForm">
-                            <div class="row">
+                        <form [formGroup]="profilForm ">
+                            <div class="row ">
                                 <div class="col-md-3 ">
                                     <div class="form-group ">
                                         <label>ajouter un </label>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
+                                <div class="col-md-5 ">
                                     <div class="form-group ">
-                                        <div class="form-group col-md-11" style="padding-top: 2.5px;">
-                                            <ng-multiselect-dropdown formControlName="skill" [placeholder]="'Compétence'" [settings]="dropdownSettings" [data]="dropdownList" (onSelect)="onItemSelect($event)" (onSelectAll)="onSelectAll($event)">
+                                        <div class="form-group col-md-11 " style="padding-top: 2.5px; ">
+                                            <ng-multiselect-dropdown formControlName="skill" [placeholder]=" 'Compétence' " [settings]="dropdownSettings " [data]="dropdownList " (onSelect)="onItemSelect($event) " (onSelectAll)="onSelectAll($event) ">
                                             </ng-multiselect-dropdown>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="form-group col-md-3">
-                                    <button type="submit" class="btn btn-danger btn-fill" (click)="addSkills() ">Ajouter Compétence</button>
+                                <div class="form-group col-md-3 ">
+                                    <button type="submit " class="btn btn-danger btn-fill " (click)="addSkills() ">Ajouter Compétence</button>
                                 </div>
                             </div>
                             <div class="row " *ngFor="let skill of userData.skills ">
@@ -197,7 +193,7 @@
                                 </div>
                                 <div class="col-md-1 ">
                                     <div class="d-flex ajustify-content-center ">
-                                        <div (click)=removeskills(skill.id) style="cursor:pointer;">
+                                        <div (click)=removeskills(skill.id) style="cursor:pointer; ">
                                             <img src="assets/img/trash-can.png " style="height: 30px; ">
                                         </div>
                                     </div>
@@ -207,8 +203,15 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-4 d-flex justify-content-center "></div>
+
         </div>
 
 
+
+        <div class="col-md-4 d-flex justify-content-center "></div>
+
+
     </div>
+
+
+</div>

@@ -212,11 +212,20 @@ export class UserService {
 
 
   /**
-   * get All Teachers
+   * get All stuff
    * @returns 
    */
   getAllStuff() {
     return this.http.get(this.path + "/stuff/all").pipe(retry(2),
+      catchError(this.traitementErreur));
+  }
+
+  /**
+   * get All category
+   * @returns 
+   */
+   getAllStcategory() {
+    return this.http.get(this.path + "/category/all").pipe(retry(2),
       catchError(this.traitementErreur));
   }
 
@@ -227,6 +236,16 @@ export class UserService {
   findTeacherBySkills(element) {
     const options = this.createRequestOptions();
     return this.http.post(this.path + "/teacher/search", JSON.stringify(element), { headers: options }).
+      pipe(retry(2),
+        catchError(this.traitementErreur))
+  }
+  
+  /**
+   * find Teacher By Skills
+   */
+   findTeacherByCategory(id) {
+    const options = this.createRequestOptions();
+    return this.http.get(this.path + "/teacher/search/"+id, { headers: options }).
       pipe(retry(2),
         catchError(this.traitementErreur))
   }

@@ -4,7 +4,7 @@
             <div class="col-md-12">
                 <div class="card strpied-tabled-with-hover">
                     <div class="card-header ">
-                        <h4 class="card-title">Teacher List</h4>
+                        <h4 class="card-title">List des Offres</h4>
                         <div style="float: right; display: flex;">
                             <input type="search" [(ngModel)]="searchName" style=" margin-top: 5px;" *ngIf="tSearch" class="form-control" placeholder="First name" value=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             <a _ngcontent-htr-c55=" " class="btn btn-outline mt-1 " (click)="toggleSearch()">
@@ -15,13 +15,13 @@
                         <table class="table table-hover table-striped ">
                             <thead>
                                 <th>ID</th>
-                                <th>title</th>
-                                <th>stuff</th>
+                                <th>titre</th>
+                                <th>Personnel</th>
                                 <th>deadline</th>
                                 <th>poste</th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let teacher of listOffre">
+                                <tr *ngFor="let teacher of listOffre |slice: (page-1) * 10 : page * 10">
                                     <td>{{teacher.id}}</td>
                                     <td>{{teacher.title}} </td>
                                     <td>{{teacher.Personel.firstname}} {{teacher.Personel.lastname}}</td>
@@ -31,6 +31,7 @@
                             </tbody>
                         </table>
                     </div>
+                    <ngb-pagination class="d-flex justify-content-center" [(page)]="page" [pageSize]="10" [collectionSize]="listOffre.length"></ngb-pagination>
                 </div>
             </div>
         </div>

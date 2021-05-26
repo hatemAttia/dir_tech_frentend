@@ -13,6 +13,7 @@ export class StuffControllerComponent implements OnInit {
   listStuff;
   searchName='';
   tSearch=false;
+  page=1;
   constructor( public adminServ: AdminService,private userServ: UserService,
     private router: Router) { }
 

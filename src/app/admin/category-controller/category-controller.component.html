@@ -1,4 +1,3 @@
-<!-- ///////////////////// password form ///////////////////// -->
 <ng-template #content let-modal>
     <div class="modal-header">
         <h4 class="modal-title" id="modal-basic-title">ajouter une Compétence</h4>
@@ -9,18 +8,37 @@
     <div class="modal-body">
         <form>
             <div class="form-group">
-                <label>Nom de Compétence</label>
-                <input type="search" [(ngModel)]="skillName" name="skill" class="form-control" placeholder="Skill name" value="">
-                <label>categorie</label>
-                <select class="form-control" name="category" [(ngModel)]="_category">
-                    <option *ngFor="let option of listCategories" > {{option.name}}</option>   
-                </select>
+                <label>Nom de categorie</label>
+                <input type="search" [(ngModel)]="categorieName" name="skill" class="form-control" placeholder="categorie name" value="">
+
             </div>
         </form>
     </div>
 
     <div class="modal-footer">
-        <button type="submit " class="btn btn-info btn-danger pull-right" (click)="addSkill()">Registrer</button>
+        <button type="submit " class="btn btn-info btn-danger pull-right" (click)="addCategory()">Registrer</button>
+
+    </div>
+</ng-template>
+<ng-template #update let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">modifier une Compétence</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label>Nom de categorie</label>
+                <input type="text" class="form-control" [(ngModel)]="categorieName" name="categorieName" placeholder="category name">
+
+            </div>
+        </form>
+    </div>
+
+    <div class="modal-footer">
+        <button type="submit " class="btn btn-info btn-danger pull-right" (click)="addCategory()">Registrer</button>
 
     </div>
 </ng-template>
@@ -32,8 +50,8 @@
                     <div class="card-header ">
                         <h4 class="card-title">Teacher List</h4>
                         <div style="float: right; display: flex;">
-                            <input type="search" [(ngModel)]="searchName" style=" margin-top: 5px;" *ngIf="tSearch" class="form-control" placeholder="Name" value=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            <a style="margin-right: 10px;" class="btn btn-outline mt-1 " (click)="toggleSearch()">
+                            <input type="search" [(ngModel)]="searchName" style=" margin-top: 5px;" #collapse="ngbCollapse" [(ngbCollapse)]="!searchToggle" class="form-control" placeholder="Name" value=""> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <a style="margin-right: 10px;" class="btn btn-outline mt-1 " (click)="collapse.toggle()" [attr.aria-expanded]="searchToggle">
                                 <i class="nc-icon nc-zoom-split "></i>&nbsp;&nbsp;Search
                             </a>
                             <a class="btn btn-adminRed mt-1 " (click)="open(content)">
@@ -46,28 +64,27 @@
                             <thead>
                                 <th>ID</th>
                                 <th>Name</th>
-                                <th>categorie Name</th>
-                                <th>Name</th>
+                                <th>opp</th>
+
                             </thead>
                             <tbody>
-                                <tr *ngFor="let skill of listSkill | searchSkill: searchName|slice: (page-1) * 10 : page * 10">
-                                    <td>{{skill.id}}</td>
-                                    <td>{{skill.name}}</td>
-                                    <td>{{skill.category.name}}</td>
+                                <tr *ngFor="let category of listCategories | searchSkill: searchName|slice: (page-1) * 10 : page * 10">
+                                    <td>{{category.id}}</td>
+                                    <td>{{category.name}}</td>
+                                    <td></td>
                                     <td>
-                                        <button type="button" class="btn btn-warning" (click)=toggleUpdate(skill)>UPDATE</button>&nbsp;
-                                        <button type="button" class="btn btn-danger" (click)=DeleteSkill(skill)>DELETE</button>
+                                        <button type="button" class="btn btn-warning" (click)="updateCatToggle(update,category)">UPDATE</button>&nbsp;
+                                        <button type="button" class="btn btn-danger" (click)=deleteCategory(category)>DELETE</button>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                     </div>
-                    <ngb-pagination class="d-flex justify-content-center" [(page)]="page" [pageSize]="10" [collectionSize]="collectionSize"></ngb-pagination>
-
+                    <ngb-pagination class="d-flex justify-content-center" [(page)]="page" [pageSize]="10" [collectionSize]="listCategories.length"></ngb-pagination>
                     <!-- ==================================Update Skill ================================ -->
-                    <div *ngIf="addToggle" class="card col-md-6" style="margin-left: 20px;">
+                    <div #collapse="ngbCollapse" [(ngbCollapse)]="!updateToggle" class="card col-md-6" style="margin-left: 20px;">
                         <div class="card-header">
-                            <h4 class="card-title">Edit Skill</h4>
+                            <h4 class="card-title">Edit Categorie</h4>
                         </div>
                         <div class="card-body">
                             <button type="button" aria-hidden="true" class="close notif-button" (click)="closeUpdateBlock()"><i class="nc-icon nc-simple-remove"></i></button>
@@ -75,16 +92,11 @@
                             <div class="row ">
                                 <div class="px-1">
                                     <div class="form-group">
-                                        <label>Skill</label>
-                                        <input type="text" class="form-control" [(ngModel)]="skillName" placeholder="SkillName">
+                                        <label>categorie</label>
+                                        <input type="text" class="form-control" [(ngModel)]="categorieName" placeholder="category name">
                                     </div>
                                 </div>
-                                <div>
-                                    <label>categorie</label>
-                                    <select class="form-control" name="category" [(ngModel)]="_category">
-                                        <option *ngFor="let option of listCategories" [selected]="option.selected == _category"> {{option.name}}</option>   
-                                     </select>
-                                </div>
+
                             </div>
                             <button type="button" class="btn btn-warning" (click)="updateSkill()">UPDATE</button>&nbsp;
                             <div class="clearfix "></div>

@@ -16,7 +16,7 @@ body {
 }
 
 a {
-    color: #e43c5c;
+    color: #ca371b;
 }
 
 a:hover {
@@ -506,7 +506,7 @@ section {
 }
 
 .section-title h3 span {
-    color: #e43c5c;
+    color: #ca371b;
 }
 
 .section-title p {
@@ -1475,7 +1475,8 @@ section {
 
 .blog .entry .entry-content .read-more a {
     display: inline-block;
-    background: #e43c5c;
+    cursor: pointer;
+    background: #ca371b;
     color: #fff;
     padding: 5px 20px 7px 20px;
     transition: 0.3s;
@@ -1484,7 +1485,7 @@ section {
 }
 
 .blog .entry .entry-content .read-more a:hover {
-    background: #d01d3f;
+    background: #ca371b;
 }
 
 .blog .entry .entry-content h3 {

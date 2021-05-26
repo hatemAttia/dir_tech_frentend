@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AdminService } from 'src/app/shared/services/admin.service';
 import { UserService } from 'src/app/shared/services/user.service';
 
@@ -9,15 +10,20 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./skill-controller.component.css']
 })
 export class SkillControllerComponent implements OnInit {
+
   skillName;
-  listStuff;
+  listSkill;
+  _category;
+  listCategories;
   addToggle = false;
   notifToggle = false;
   searchName = '';
   tSearch = false;
   idSkill;
   notifBody;
-  constructor(public adminServ: AdminService, private userServ: UserService,
+  page = 1;
+  collectionSize;
+  constructor(private modalService: NgbModal,public adminServ: AdminService, private userServ: UserService,
     private router: Router) { }
 
   ngOnInit() {
@@ -28,12 +34,16 @@ export class SkillControllerComponent implements OnInit {
    * 
    */
   display() {
-    this.userServ.getAllSkills().subscribe((resp: any) => {
-      console.log(resp);
-      this.listStuff = resp;
-    }, error => {
-      console.log(error);
+    this.userServ.getAllSkills().subscribe((res: any) => {
+      this.listSkill = res;
+      if(this.listSkill)
+      this.collectionSize=this.listSkill.length
     });
+    this.userServ.getAllStcategory().subscribe((res: any) => {
+      this.listCategories = res;
+     
+    });
+    
   }
 
   /**
@@ -47,27 +57,27 @@ export class SkillControllerComponent implements OnInit {
    * 
    */
   addSkill() {
-    if (this.skillName != '') {
+    const found =this.listCategories.find(cat=> cat.name ==this._category)
       this.adminServ.addSkill({
         "name": this.skillName
-      }).subscribe(res => {
+      },found.id).subscribe(res => {
         console.log(res)
         this.display();
         this.notifBody = "Skill " + this.skillName + " added"
         this.skillName = '';
         this.showNotif();
       })
-    }
   }
-
 
   /**
    * 
    */
   updateSkill() {
+    const found =this.listCategories.find(cat=> cat.name ==this._category)
     if (this.skillName != '') {
       this.adminServ.updateSkill({
-        "name": this.skillName
+        "name": this.skillName,
+        "categoryId":found.id
       }, this.idSkill).subscribe(res => {
         this.display();
         this.notifBody = "Skill " + this.skillName + " updated"
@@ -83,12 +93,12 @@ export class SkillControllerComponent implements OnInit {
    */
   DeleteSkill(element) {
     this.adminServ.DeleteSkill(element.id).subscribe((resp: any) => {
-
       this.display();
       this.notifBody = resp.res
       this.showNotif();
     })
   }
+
   showNotif() {
     this.notifToggle = true;
   }
@@ -98,6 +108,7 @@ export class SkillControllerComponent implements OnInit {
   }
 
   toggleUpdate(element) {
+    this._category=element.category.name;
     this.addToggle = !this.addToggle;
     this.skillName = element.name;
     this.idSkill = element.id;
@@ -111,6 +122,10 @@ export class SkillControllerComponent implements OnInit {
     this.skillName = '';
     this.idSkill = "";
     this.addToggle = false;
+  }
+
+  open(content) {
+    this.modalService.open(content, { size: 'lg' });
   }
 
 }

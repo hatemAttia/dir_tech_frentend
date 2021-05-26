@@ -104,13 +104,19 @@ export class AdminService {
    * @param data 
    * @returns 
    */
-  addSkill(data){
+  addSkill(data,idcategory){
     const options = this.createRequestOptions();
-    return this.http.post(this.path + "/skill/new", JSON.stringify(data), { headers: options }).
+    return this.http.post(this.path + "/skill/new/"+idcategory, JSON.stringify(data), { headers: options }).
       pipe(retry(2),
         catchError(this.traitementErreur))
   }
   
+  /**
+   * Updta skill
+   * @param data 
+   * @param id 
+   * @returns 
+   */
   updateSkill(data,id){
     const options = this.createRequestOptions();
     return this.http.put(this.path + "/skill/update/" + id, JSON.stringify(data), { headers: options }).
@@ -119,10 +125,40 @@ export class AdminService {
   
   }
 
+  /**
+   * 
+   * @param id Delete skill
+   * @returns 
+   */
   DeleteSkill(id){
     console.log(id);
     const options = this.createRequestOptions();
     return this.http.delete(this.path + "/skill/delete/" + parseInt(id), { headers: options }).
+      pipe(retry(2),
+        catchError(this.traitementErreur))
+  }
+
+   /**
+   *  Add category
+   * @param data 
+   * @returns 
+   */
+    addCategory(data){
+      const options = this.createRequestOptions();
+      return this.http.post(this.path + "/category/new", JSON.stringify(data), { headers: options }).
+        pipe(retry(2),
+          catchError(this.traitementErreur))
+    }
+
+    /**
+   * 
+   * @param id Delete skill
+   * @returns 
+   */
+  DeleteCategory(id){
+    console.log(id);
+    const options = this.createRequestOptions();
+    return this.http.delete(this.path + "/category/delete/" + parseInt(id), { headers: options }).
       pipe(retry(2),
         catchError(this.traitementErreur))
   }

@@ -10,12 +10,15 @@
             <h5 class="section-title h1">NOTRE PROFESSEUR</h5>
         </div>
         <div class="row col-md ">
-            <div class="col-md-4 d-flex justify-content-center container-search">
+
+            <div class="col-md-12 d-flex justify-content-center container-search">
                 <div class="input-group">
-                </div>
-            </div>
-            <div class="col-md-7 d-flex justify-content-center container-search">
-                <div class="input-group">
+                    <div class="row">
+                        <div></div>
+                    </div>
+                    <select class="form-control" name="category" [(ngModel)]="_category" (change)="searchTeacherByCategorie()">
+                        <option *ngFor="let option of listCategories" [selected]="option.selected == 'tous'"> {{option.name}}</option>   
+                     </select>
                     <select id="inputState" style="margin-right: 20px;" class="form-control" [(ngModel)]="skill">
                         <option *ngFor="let option of options" > {{option.name}}</option>
                       </select>

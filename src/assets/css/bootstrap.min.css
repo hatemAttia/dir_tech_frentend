@@ -2331,8 +2331,8 @@ fieldset[disabled] a.btn {
 
 .btn-danger {
     color: #fff;
-    background-color: #dc3545;
-    border-color: #dc3545
+    background-color: #ca371b;
+    border-color: #ca371b
 }
 
 .btn-danger:hover {
@@ -2348,8 +2348,8 @@ fieldset[disabled] a.btn {
 
 .btn-danger.disabled,
 .btn-danger:disabled {
-    background-color: #dc3545;
-    border-color: #dc3545
+    background-color: #ca371b;
+    border-color: #ca371b
 }
 
 .btn-danger.active,
@@ -2583,10 +2583,10 @@ fieldset[disabled] a.btn {
 }
 
 .btn-outline-danger {
-    color: #dc3545;
+    color: #ca371b;
     background-color: transparent;
     background-image: none;
-    border-color: #dc3545
+    border-color: #ca371b;
 }
 
 .btn-outline-danger:hover {

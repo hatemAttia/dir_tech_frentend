@@ -10,7 +10,7 @@ import { SideBarComponent } from './shared/component/side-bar/side-bar.component
 import { HomeComponent } from './home/home.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { RouterModule } from '@angular/router';
-import { routes } from './shared/config';
+import { routes } from './shared/config/config';
 import { HomeAdminComponent } from './admin/home-admin/home-admin.component';
 import { LoginAdminComponent } from './auth/login-admin/login-admin.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -37,6 +37,7 @@ import { SearchSkillPipe } from './shared/pipes/search-skill.pipe';
 import { SingleOffreComponent } from './home/single-offre/single-offre.component';
 import { ListFavoriteComponent } from './home/list-favorite/list-favorite.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CategoryControllerComponent } from './admin/category-controller/category-controller.component';
 
 @NgModule({
   
@@ -68,6 +69,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SearchSkillPipe,
     SingleOffreComponent,
     ListFavoriteComponent,
+    CategoryControllerComponent,
   ],
   imports: [
     NgxPaginationModule,

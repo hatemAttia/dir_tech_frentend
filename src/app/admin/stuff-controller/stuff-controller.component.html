@@ -22,7 +22,7 @@
                                 <th>Delete</th>
                             </thead>
                             <tbody>
-                                <tr *ngFor="let stuff of listStuff | serchTeacher: searchName">
+                                <tr *ngFor="let stuff of listStuff | serchTeacher: searchName | slice: (page-1) * 10 : page * 10">
                                     <td>{{stuff.id}}</td>
                                     <td>{{stuff.lastname}} {{stuff.firstname}}</td>
                                     <td>{{stuff.email}}</td>
@@ -35,6 +35,8 @@
                             </tbody>
                         </table>
                     </div>
+                    <ngb-pagination class="d-flex justify-content-center" [(page)]="page" [pageSize]="10" [collectionSize]="listStuff.length"></ngb-pagination>
+
                 </div>
             </div>
         </div>
