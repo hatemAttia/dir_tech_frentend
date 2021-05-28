@@ -62,7 +62,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <ngb-pagination class="d-flex justify-content-center" [(page)]="page" [pageSize]="10" [collectionSize]="collectionSize"></ngb-pagination>
+                    <ngb-pagination *ngIf="listSkill" class="d-flex justify-content-center" [(page)]="page" [pageSize]="10" [collectionSize]="collectionSize"></ngb-pagination>
 
                     <!-- ==================================Update Skill ================================ -->
                     <div *ngIf="addToggle" class="card col-md-6" style="margin-left: 20px;">

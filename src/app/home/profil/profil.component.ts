@@ -24,18 +24,15 @@ export class ProfilComponent implements OnInit {
   _imgButtonEnabel = true;
   _profilButtonEnabel = true;
   profilForm: FormGroup;
+  diplomaList = [];
+  establishments = [];
+  optionsstuff = [];
   constructor(private modalService: NgbModal, private userServ: UserService, private authServ: AuthService, private formBuilder: FormBuilder) {
-    this.options = [
-      "Maitre chercheur",
-      "Maitre Assistant",
-      "Doctorant",
-      "Ingénieur",
-      "Professeur"
-    ];
+
     this.userConnected = this.authServ.getRole();
     this.userData = this.userServ.getUserData();
-    console.log(this.userData)
     this.image = "http://localhost:3000/" + this.userData.avatar;
+
     this.profilForm = this.formBuilder.group({
       firstname: [this.userData.firstname, Validators.required],
       lastname: [this.userData.lastname, Validators.required],
@@ -45,25 +42,67 @@ export class ProfilComponent implements OnInit {
       level: [this.userData.level],
       description: [this.userData.description],
       poste: [this.userData.poste],
+      diplomainstituation: [this.userData.diplomainstituation],
+      yearsexperience: [this.userData.yearsexperience],
+      url: [this.userData.url],
+      certificat: [this.userData.certificat],
+      degreeobtained: [this.userData.degreeobtained],
       skill: [''],
     });
   }
 
   ngOnInit() {
     this.display();
+
+    this.diplomaList = [
+      "licence Technologie de l’informatique",
+      "Diplôme d'ingénieur en génie logiciel ",
+      "Master en ingénierie des systèmes d'information",
+      "Master en sécurité informatique",
+      "licence d'informatique",
+    ]
+
+    this.establishments = [
+      "L'École pluridisciplinaire internationale(EPI)",
+      "Ecole Nationale d’Ingénieurs de Tunis (ENIT)",
+      "Ecole Nationale d’Ingénieurs de Sousse (ENISO)",
+      "Ecole Nationale d’Ingénieurs de Bizerte (ENIB) ",
+      "Ecole Nationale d’Ingénieurs de Monastir (ENIM)",
+      "Ecole Nationale d’Ingénieurs de Sfax (ENIS)",
+      "Faculté des Sciences de Tunis (FST)",
+      "Ecole Nationale Supérieure d’Ingénieurs de Tunis (ENSIT)",
+      "Ecole Nationale d’Ingénieurs de Carthage (ENI-Carthage)",
+      "Ecole Nationale d’Electronique et de Communication de Sfax (ENET’Com) ",
+      "Ecole Nationale des Sciences de l’Informatique (ENSI)",
+      "Ecole Supérieure des Communications de Tunis (SUP’COM)",
+      "Ecole Polytechnique de Tunisie (EPT)",
+    ];
+
+    this.optionsstuff = [
+      "scolatité",
+      "equipe administrative"
+    ];
+
+    this.options = [
+      "Maitre chercheur",
+      "Maitre Assistant",
+      "Doctorant",
+      "Ingénieur",
+      "Professeur"
+    ];
   }
 
   display() {
     this.userServ.getAllSkills().subscribe((res: any) => {
       var dd = [];
-      if(this.userData.skills)
-      res.forEach(skill => {
-        var found = this.userData.skills.filter(elment => skill.id == elment.id)
-        if (found.length<=0) {
-          dd.push(skill)
-        }
+      if (this.userData.skills)
+        res.forEach(skill => {
+          var found = this.userData.skills.filter(elment => skill.id == elment.id)
+          if (found.length <= 0) {
+            dd.push(skill)
+          }
 
-      });
+        });
       this.dropdownList = dd;
     });
     this.dropdownSettings = {
@@ -75,6 +114,8 @@ export class ProfilComponent implements OnInit {
       itemsShowLimit: 3,
       allowSearchFilter: true
     };
+
+
 
   }
   onFileChanged(event) {
@@ -125,12 +166,14 @@ export class ProfilComponent implements OnInit {
     if (this.userConnected == "ROLE_TEACHER") {
       this.userServ.updateUserTeacher(this.profilForm.value, this.userData.id).subscribe(resp => {
         this.userUploaded = true;
+        this.userData = this.userServ.getUserData();
         setTimeout(() => {
           this.userUploaded = false;
         }, 3000);
       })
     } else if (this.userConnected == "ROLE_STUFF") {
       this.userServ.updateUserStuff(this.profilForm.value, this.userData.id).subscribe(resp => {
+        this.userData = this.userServ.getUserData();
         this.userUploaded = true;
         setTimeout(() => {
           this.userUploaded = false;
@@ -152,9 +195,7 @@ export class ProfilComponent implements OnInit {
       "EnseignantId": this.userData.id,
       "skillId": skillId
     }).subscribe(res => {
-      console.log(res)
       this.userServ.getTeacherDataFromDB().subscribe((res: any) => {
-        console.log(res)
         this.userData = res;
         this.userServ.setUserData(res);
         this.display();
@@ -171,12 +212,17 @@ export class ProfilComponent implements OnInit {
       this.userServ.addSkillToTeacher({
         "skill": this.profilForm.get('skill').value
       }).subscribe(res => {
-        console.log(res)
-        this.userServ.getTeacherDataFromDB().subscribe((res: any) => {
-          console.log(res)
-          this.userData = res;
-          this.userServ.setUserData(res);
-        });
+        this.profilForm.controls['skill'].setValue("");
+        setTimeout(() => {
+          this.userServ.getTeacherDataFromDB().subscribe((res: any) => {
+            console.log(res);
+
+            this.userData = res;
+            this.userServ.setUserData(res);
+
+            this.display();
+          });
+        }, 200);
       })
     }
   }

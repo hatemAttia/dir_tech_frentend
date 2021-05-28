@@ -17,7 +17,7 @@
                         <div></div>
                     </div>
                     <select class="form-control" name="category" [(ngModel)]="_category" (change)="searchTeacherByCategorie()">
-                        <option *ngFor="let option of listCategories" [selected]="option.selected == 'tous'"> {{option.name}}</option>   
+                        <option *ngFor="let option of listCategories" [selected]="option.selected === 'tous'"> {{option.name}}</option>   
                      </select>
                     <select id="inputState" style="margin-right: 20px;" class="form-control" [(ngModel)]="skill">
                         <option *ngFor="let option of options" > {{option.name}}</option>
@@ -46,6 +46,8 @@
                                     <p class="card-text"> {{teacher.email}}</p>
                                     <p class="card-text"> {{teacher.phonenumber}}</p>
                                     <p class="card-text">{{teacher.level}}</p>
+                                    <p class="card-text" *ngIf="teacher.yearsexperience || teacher.yearsexperience >0 "> experience :{{teacher.yearsexperience}} années</p>
+                                    <p class="card-text">{{teacher.degreeobtained}} :{{teacher.diplomainstituation}} </p>
 
                                 </div>
                             </div>
@@ -60,6 +62,8 @@
                                             <p style="color: #31a2b8;font-weight: 800;">| {{skill.name}}</p>
                                         </li>
                                     </ul>
+                                    <p class="card-text" *ngIf="teacher.certificat">Certifier: {{teacher.certificat}}</p>
+                                    <a class="card-text">{{teacher.url}}</a>
                                     <a (click)="addFavorite(teacher)" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
 
                                 </div>

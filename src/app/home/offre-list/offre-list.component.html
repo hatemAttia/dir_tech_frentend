@@ -63,3 +63,9 @@
         </div>
     </section>
 </div>
+<div *ngIf="confirmProfil" class="notif-container col-11 col-sm-4 alert alert-info alert-with-icon" role="alert">
+    <button type="button" aria-hidden="true" class="close" (click)="closeNotif()"><i class="nc-icon nc-simple-remove"></i></button>
+    <span data-notify="icon" class="nc-icon nc-circle-09"></span>
+    <span data-notify="title">Completer votre profil : <a data-notify="title" [routerLink]="['/home/profil']"> profil </a></span>
+
+</div>

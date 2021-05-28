@@ -1,3 +1,28 @@
 .my-pagination /deep/ .ngx-pagination .current {
     background: #ca371b;
 }
+
+::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: rgb(165, 158, 158);
+    opacity: 1;
+    /* Firefox */
+}
+
+.notif-container {
+    display: inline-block;
+    margin: 0px auto;
+    position: fixed;
+    transition: all 0.5s ease-in-out 0s;
+    z-index: 1031;
+    top: 85px;
+    right: 10px;
+}
+
+.notif-button {
+    position: absolute;
+    right: 10px;
+    top: 15%;
+    margin-top: -13px;
+    z-index: 1033;
+}

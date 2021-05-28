@@ -10,6 +10,11 @@
 # General
 --------------------------------------------------------------*/
 
+@font-face {
+    font-family: "MADEEvolveSansMedium";
+    src: local("MADE Evolve Sans Medium"), url(../fonts/MADE-Evolve-Sans-Medium.otf) format("truetype");
+}
+
 body {
     font-family: "Open Sans", sans-serif;
     color: #444444;
@@ -2092,4 +2097,12 @@ section {
     background: #d01d3f;
     color: #fff;
     text-decoration: none;
+}
+
+.card-login {
+    background-color: #676767;
+}
+
+* {
+    font-family: MADEEvolveSansMedium;
 }

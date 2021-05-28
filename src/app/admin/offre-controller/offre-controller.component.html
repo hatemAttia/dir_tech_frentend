@@ -31,7 +31,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <ngb-pagination class="d-flex justify-content-center" [(page)]="page" [pageSize]="10" [collectionSize]="listOffre.length"></ngb-pagination>
+                    <ngb-pagination *ngIf="listOffre" class="d-flex justify-content-center" [(page)]="page" [pageSize]="10" [collectionSize]="listOffre.length"></ngb-pagination>
                 </div>
             </div>
         </div>

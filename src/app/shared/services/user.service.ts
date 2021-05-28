@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpHeaders, HttpErrorResponse, HttpClient } from '@angular/common/http';
 import { retry, catchError } from 'rxjs/operators'
 import { Observable, throwError } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +12,8 @@ export class UserService {
   blogOffre;
   userData: any;
   path = "http://localhost:3000/api";
-
-  constructor(private http: HttpClient) { }
+  accountVerify;
+  constructor(private http: HttpClient,private authServ:AuthService) { }
 
 
   /**
@@ -88,6 +89,21 @@ export class UserService {
     return this.http.post(this.path + "/auth/teacher", JSON.stringify(data), { headers: options }).
       pipe(retry(2),
         catchError(this.traitementErreur))
+  }
+
+  verfierAccount(){
+    this.getUserData()
+console.log(this.userData);
+
+    if(this.authServ.getRole()=="ROLE_TEACHER"){
+        if(this.userData.degreeobtained) {
+        return false;
+      }else{
+        return true;
+      }
+    }else{
+      return false;
+    }
   }
 
   /**

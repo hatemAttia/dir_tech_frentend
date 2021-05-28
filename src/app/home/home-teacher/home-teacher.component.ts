@@ -35,8 +35,9 @@ export class HomeTeacherComponent implements OnInit {
     });
   }
 
-
-
+  /**
+   * 
+   */
   searchTeacher() {
     if (this.skill != "tous") {
       //search by skill
@@ -52,39 +53,56 @@ export class HomeTeacherComponent implements OnInit {
     }
   }
 
+  /**
+   * 
+   */
   searchTeacherByCategorie() {
     const _fakeOption = [];
     const found = this.listCategories.find(cat => cat.name === this._category)
     this.userServ.getAllSkills().subscribe((res: any) => {
-    
+
       if (res)
         res.forEach(op => {
           if (found.name !== "tous") {
             if (op.categoryId == found.id)
-            _fakeOption.push(op)
+              _fakeOption.push(op)
           } else {
-              _fakeOption.push(op);
+            _fakeOption.push(op);
           }
 
         });
       this.options = _fakeOption;
     })
-    this.userServ.findTeacherByCategory(found.id).subscribe(res => {
-      this.listTeachers = res;
-      this.p = 1;
-    })
+    if (found.name !== "tous") {
+      this.userServ.findTeacherByCategory(found.id).subscribe(res => {
+        this.listTeachers = res;
+        this.p = 1;
+      })
+    } else {
+      this.listTeachers = this.ListallTeacher;
+    }
   }
 
+  /**
+   * 
+   * @param data 
+   */
   addFavorite(data) {
     this.notifBody = this.userServ.addFavorite(data)
     console.log(data);
     this.showNotif();
   }
 
+  /**
+   * 
+   */
   showNotif() {
     this.notifToggle = true;
   }
 
+  /**
+   * 
+   */
   closeNotif() {
     this.notifToggle = false;
   }

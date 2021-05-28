@@ -10,10 +10,13 @@ import { UserService } from 'src/app/shared/services/user.service';
 export class OffreListComponent implements OnInit {
   
   listOffres;
+  confirmProfil =true;
   constructor(private userServ:UserService,private router:Router) { }
 
   ngOnInit(): void {
-
+    this.confirmProfil=this.userServ.verfierAccount();
+    console.log( this.confirmProfil);
+    
     this.userServ.getAlloffre().subscribe((resp: any) => {
       this.listOffres = resp;
     });
@@ -29,4 +32,7 @@ export class OffreListComponent implements OnInit {
     this.router.navigate(['home/single-offre']);
   }
 
+  closeNotif() {
+    this.confirmProfil = true;
+  }
 }
