@@ -19,7 +19,7 @@ export class AdminService {
     "phonenumber": 12111112,
     "avatar": "uploads/1617749395924user.png"
   };
-  path = "http://localhost:3000/api";
+  path = "http://back-end-pfa.herokuapp.com/api";
   /**
    * Option http
    */

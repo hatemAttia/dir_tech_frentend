@@ -11,7 +11,7 @@ export class UserService {
   favoritesList = [];
   blogOffre;
   userData: any;
-  path = "http://localhost:3000/api";
+  path = "http://back-end-pfa.herokuapp.com/api";
   accountVerify;
   constructor(private http: HttpClient,private authServ:AuthService) { }
 
