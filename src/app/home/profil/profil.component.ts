@@ -13,20 +13,23 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 export class ProfilComponent implements OnInit {
   userUploaded = false;
   dropdownSettings: IDropdownSettings = {};
-
-  options;
-  userData;
-  image;
-  imageFile;
+  currentPassword:any;
+  confPassword:any;
+  newPassword:any;
+  options:any;
+  userData:any;
+  image:any;
+  imageFile:any;
   imageImageUploaded = false;
   dropdownList = [];
-  userConnected;
+  userConnected:any;
   _imgButtonEnabel = true;
   _profilButtonEnabel = true;
   profilForm: FormGroup;
   diplomaList = [];
   establishments = [];
   optionsstuff = [];
+
   constructor(private modalService: NgbModal, private userServ: UserService, private authServ: AuthService, private formBuilder: FormBuilder) {
 
     this.userConnected = this.authServ.getRole();
