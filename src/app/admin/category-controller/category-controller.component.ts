@@ -16,6 +16,7 @@ export class CategoryControllerComponent implements OnInit {
   notifBody;
   notifToggle;
   page = 1;
+  searchName:any;
   constructor(private modalService: NgbModal, public adminServ: AdminService, private userServ: UserService) { }
 
   ngOnInit(): void {

@@ -82,7 +82,7 @@
                     </div>
                     <ngb-pagination class="d-flex justify-content-center" [(page)]="page" [pageSize]="10" [collectionSize]="listCategories.length"></ngb-pagination>
                     <!-- ==================================Update Skill ================================ -->
-                    <div #collapse="ngbCollapse" [(ngbCollapse)]="!updateToggle" class="card col-md-6" style="margin-left: 20px;">
+                    <!-- <div #collapse="ngbCollapse" [(ngbCollapse)]="!updateToggle" class="card col-md-6" style="margin-left: 20px;">
                         <div class="card-header">
                             <h4 class="card-title">Edit Categorie</h4>
                         </div>
@@ -102,7 +102,7 @@
                             <div class="clearfix "></div>
 
                         </div>
-                    </div>
+                    </div> -->
                     <!-- ==================================Add Skill ================================ -->
                     <div *ngIf="notifToggle" class=" notif-container col-11 col-sm-4 alert alert-success alert-with-icon" role="alert">
                         <button type="button" aria-hidden="true" class="close" (click)="closeNotif()"><i class="nc-icon nc-simple-remove"></i></button>
