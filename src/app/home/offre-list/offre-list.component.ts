@@ -8,7 +8,7 @@ import { UserService } from 'src/app/shared/services/user.service';
   styleUrls: ['./offre-list.component.css']
 })
 export class OffreListComponent implements OnInit {
-  
+  p ;
   listOffres;
   confirmProfil =true;
   constructor(private userServ:UserService,private router:Router) { }
