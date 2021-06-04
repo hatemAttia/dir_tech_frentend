@@ -219,16 +219,15 @@ export class ProfilComponent implements OnInit {
         setTimeout(() => {
           this.userServ.getTeacherDataFromDB().subscribe((res: any) => {
             console.log(res);
-
             this.userData = res;
             this.userServ.setUserData(res);
-
             this.display();
           });
         }, 200);
       })
     }
   }
+
   open(content) {
     this.modalService.open(content, { size: 'lg' });
   }
