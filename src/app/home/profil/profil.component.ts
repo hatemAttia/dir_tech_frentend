@@ -35,6 +35,7 @@ export class ProfilComponent implements OnInit {
     this.userConnected = this.authServ.getRole();
     this.userData = this.userServ.getUserData();
     this.image = "http://localhost:3000/" + this.userData.avatar;
+console.log(  this.image);
 
     this.profilForm = this.formBuilder.group({
       firstname: [this.userData.firstname, Validators.required],
@@ -87,11 +88,12 @@ export class ProfilComponent implements OnInit {
     ];
 
     this.options = [
-      "Maitre chercheur",
+      "Assistant",
       "Maitre Assistant",
-      "Doctorant",
+      "Maitre de conférences",
       "Ingénieur",
-      "Professeur"
+      "Corp Technologue",
+      "Expert",
     ];
   }
 

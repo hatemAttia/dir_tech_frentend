@@ -63,9 +63,10 @@
                                         </li>
                                     </ul>
                                     <p class="card-text" *ngIf="teacher.certificat">Certifier: {{teacher.certificat}}</p>
-                                    <a class="card-text">{{teacher.url}}</a>
-                                    <a (click)="addFavorite(teacher)" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
 
+                                </div>
+                                <div class="card-body text-center mt-4">
+                                    <a (click)="addFavorite(teacher)" class="btn btn-primary btn-sm"><i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
                         </div>

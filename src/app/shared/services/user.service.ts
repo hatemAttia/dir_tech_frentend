@@ -11,7 +11,9 @@ export class UserService {
   favoritesList = [];
   blogOffre;
   userData: any;
-  path = "https://back-end-pfa.herokuapp.com/api";
+ 
+  // path = "https://back-end-pfa.herokuapp.com/api";
+  path = " http://localhost:3000/api";
   accountVerify;
   constructor(private http: HttpClient,private authServ:AuthService) { }
 
@@ -288,9 +290,9 @@ console.log(this.userData);
     if (!found) {
       this.favoritesList.push(data);
       localStorage.setItem('favorites', JSON.stringify(this.favoritesList));
-      return message = "teacher add in list favorie ,check list"
+      return message = "enseignant(e) ajouté(e) dans la liste favorite,vérifiez la liste"
     }else{
-      return message = "already favorite"
+      return message = "déjà favori"
 
     }
   }

@@ -33,6 +33,6 @@ export class OffreListComponent implements OnInit {
   }
 
   closeNotif() {
-    this.confirmProfil = true;
+    this.confirmProfil = false;
   }
 }

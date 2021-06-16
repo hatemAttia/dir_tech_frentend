@@ -45,7 +45,7 @@ export class SignupComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userType = "Stuff";
+    this.userType = "Staff Pedagogique";
     this.userServ.getAllSkills().subscribe((resp: any) => {
       this.dropdownList = resp;
     });
@@ -68,15 +68,16 @@ export class SignupComponent implements OnInit {
 
     this.options = [
       "choose ...",
-      "Maitre chercheur",
+      "Assistant",
       "Maitre Assistant",
-      "Doctorant",
+      "Maitre de conférences",
       "Ingénieur",
-      "Professeur"
+      "Corp Technologue",
+      "Expert"
     ];
     this.types = [
-      "Stuff",
-      "Teacher"
+      "Staff Pedagogique",
+      "Enseignant"
     ];
   }
 
@@ -109,7 +110,7 @@ export class SignupComponent implements OnInit {
    */
   signup() {
     console.log(this.signupForm.get('phonenumber').valid);
-    if (this.userType == "Teacher") {
+    if (this.userType == "Enseignant") {
       if (!this.signupForm.valid ||
         this.signupForm.get('level').value == "" ||
         this.signupForm.get('skill').value == "" ||
